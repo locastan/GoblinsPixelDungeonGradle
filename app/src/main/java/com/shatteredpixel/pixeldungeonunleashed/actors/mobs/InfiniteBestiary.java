@@ -25,7 +25,7 @@ public class InfiniteBestiary {
     public enum Themes { THEME_SLIMES, THEME_UNDEAD, THEME_NATURAL, THEME_BANDITS, THEME_EARTH, THEME_AIR,
                   THEME_FIRE, THEME_WATER, THEME_SPIRIT, THEME_DEMONS, THEME_SEWERS, THEME_PRISON,
                   THEME_CAVES, THEME_CITY, THEME_HALLS, THEME_FROZEN
-    };
+    }
 
     public static Themes currentTheme;
 
@@ -241,6 +241,7 @@ public class InfiniteBestiary {
                    case 1:  return Bat.class;
                    case 2:  return Brute.class;
                    case 3:  return Shaman.class;
+                   case 4:  return BodFly.class;
                    default: return Spinner.class;
                }
            case THEME_CITY:

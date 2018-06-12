@@ -63,6 +63,7 @@ public class ItemSpriteSheet {
 	public static final int ARMOR	= ROW1+12;
 	public static final int RING	= ROW1+13;
 	public static final int SMTH	= ROW1+14;
+	public static final int RAND_POT	= ROW1+15;
 
 	//Row Two: Miscellaneous single use items
 	public static final int GOLD	    = ROW2;

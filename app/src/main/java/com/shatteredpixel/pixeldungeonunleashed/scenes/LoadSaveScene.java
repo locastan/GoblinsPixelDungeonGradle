@@ -139,11 +139,11 @@ public class LoadSaveScene extends PixelScene {
                 break;
             case Dungeon.DIFF_NTMARE:
                 diffLevel = "NIGHTMARE";
-                saveInstructions = "Games may not be saved in Nightmare mode.";
+                saveInstructions = "Games may not be saved/backed up in Nightmare mode.";
                 break;
             case Dungeon.DIFF_ENDLESS:
                 diffLevel = "ENDLESS";
-                saveInstructions = "Games may not be saved in Endless mode.";
+                saveInstructions = "Games may not be saved/backed up in Endless mode.";
                 break;
             case Dungeon.DIFF_TEST:
                 diffLevel = "TEST";
@@ -293,14 +293,17 @@ public class LoadSaveScene extends PixelScene {
         add(buttonCapton2);
 
         // add the Export and Import button..
-
-        ExImButton btnEx = new ExImButton(this, true, "Backup", "all");
-        add(btnEx);
-        btnEx.visible = true;
-        btnEx.setRect(posX, posY, BUTTON1_WIDTH, BUTTON_HEIGHT);
+        // Export only if difficulty allows saving as well.
+        int diff = GoblinsPixelDungeon.getDifficulty();
+        if ((Dungeon.hero == null) || (!Dungeon.hero.isAlive()) || (diff <= Dungeon.DIFF_EASY) || (diff <= Dungeon.DIFF_TEST) ||
+                (diff == Dungeon.DIFF_NORM)) {
+            ExImButton btnEx = new ExImButton(this, true, "Backup", "all");
+            add(btnEx);
+            btnEx.visible = true;
+            btnEx.setRect(posX, posY, BUTTON1_WIDTH, BUTTON_HEIGHT);
+        }
 
         ExImButton btnIm = new ExImButton(this, false, "Import", "all");
-
         add(btnIm);
         btnIm.visible = true;
         btnIm.setRect(posX2, posY, (int) (BUTTON2_WIDTH), BUTTON_HEIGHT);
@@ -538,8 +541,12 @@ public class LoadSaveScene extends PixelScene {
         File file = new File(downloadFolder);
         DownloadManager downloadManager = (DownloadManager) GoblinsPixelDungeon.instance.getSystemService(DOWNLOAD_SERVICE);
         downloadManager.addCompletedDownload(file.getName(), file.getName(), true, "application/zip",file.getAbsolutePath(),file.length(),true);
-        InterlevelScene.mode = InterlevelScene.Mode.SAVE;
-        Game.switchScene( InterlevelScene.class );
+        if (Dungeon.hero == null) {
+            Game.switchScene(TitleScene.class);
+        } else {
+            InterlevelScene.mode = InterlevelScene.Mode.SAVE;
+            Game.switchScene( InterlevelScene.class );
+        }
     }
 
     protected static void GetGamesBack() {
@@ -554,9 +561,12 @@ public class LoadSaveScene extends PixelScene {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
-        Game.switchScene( InterlevelScene.class );
+        if (Dungeon.hero == null) {
+            Game.switchScene(TitleScene.class);
+        } else {
+            InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
+            Game.switchScene( InterlevelScene.class );
+        }
     }
 
     private static class GameButton extends RedButton {
