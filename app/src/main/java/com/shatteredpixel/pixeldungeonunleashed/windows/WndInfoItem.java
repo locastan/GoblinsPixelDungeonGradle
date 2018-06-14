@@ -26,6 +26,7 @@ package com.shatteredpixel.pixeldungeonunleashed.windows;
 import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.Artifact;
 import com.shatteredpixel.pixeldungeonunleashed.items.rings.Ring;
 import com.shatteredpixel.pixeldungeonunleashed.items.wands.Wand;
+import com.shatteredpixel.pixeldungeonunleashed.utils.GLog;
 import com.watabou.noosa.BitmapTextMultiline;
 import com.shatteredpixel.pixeldungeonunleashed.items.Heap;
 import com.shatteredpixel.pixeldungeonunleashed.items.Heap.Type;
@@ -105,7 +106,7 @@ public class WndInfoItem extends Window {
 						info = "'Here lies Tom, he loved bacon.  Oh, and his wife and kids too.'\n\n" + TXT_OWNER;
 						break;
 					case 5:
-						info = "'Here lies my husband Tom, now I know where he is every night.'\n\n" + TXT_OWNER;
+						info = "'Here lies my husband Tom. Now I know where he is every night.'\n\n" + TXT_OWNER;
 						break;
 					case 6:
 						info = "'What do you mean the whole room I'm in detects as a trap?'\n\n" + TXT_OWNER;
@@ -135,16 +136,16 @@ public class WndInfoItem extends Window {
 						info = "'I came here without being consulted and I leave without my consent.'\n\n" + TXT_OWNER;
 						break;
 					case 15:
-						info = "'I go through the door… Wait, I check for traps!'\n\n" + TXT_OWNER;
+						info = "'I go through the door...Wait, I check for traps!'\n\n" + TXT_OWNER;
 						break;
 					case 16:
-						info = "'Hmm…how do I know you are the REAL Angel of Death?'\n\n" + TXT_OWNER;
+						info = "'Hmm...how do I know you are the REAL Angel of Death?'\n\n" + TXT_OWNER;
 						break;
 					case 17:
-						info = "'... well this sucks.'\n\n" + TXT_OWNER;
+						info = "'...well this sucks.'\n\n" + TXT_OWNER;
 						break;
 					case 18:
-						info = "'Okay, if I max out this round and win initiative next round, maybe…'\n\n" + TXT_OWNER;
+						info = "'Okay, if I max out this round and win initiative next round, maybe...'\n\n" + TXT_OWNER;
 						break;
 					case 19:
 						info = "'But it was just a flesh wound.'\n\n" + TXT_OWNER;
@@ -153,7 +154,7 @@ public class WndInfoItem extends Window {
 						info = "'Let me out now!'\n\n" + TXT_OWNER;
 						break;
 					case 21:
-						info = "'That purple robe really clashes with your burning eyes…'\n\n" + TXT_OWNER;
+						info = "'That purple robe really clashes with your burning eyes...'\n\n" + TXT_OWNER;
 						break;
 					case 22:
 						info = "'He died like he lived, screaming and crying in the corner.'\n\n" + TXT_OWNER;
@@ -162,7 +163,7 @@ public class WndInfoItem extends Window {
 						info = "'Yeah, I know it's dangerous, but think of the experience points.'\n\n" + TXT_OWNER;
 						break;
 					case 24:
-						info = "'What do you mean with, 'Your potion of levitation wore off'?'\n\n" + TXT_OWNER;
+						info = "'What do you mean with, 'Your potion of levitation wore off.'?'\n\n" + TXT_OWNER;
 						break;
 					default:
 						info = TXT_OWNER;

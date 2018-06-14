@@ -88,7 +88,6 @@ public class SummoningTrap extends Trap {
 		for (Integer point : respawnPoints) {
 			Mob mob = Bestiary.mob( Dungeon.depth );
 			if (Dungeon.difficultyLevel == Dungeon.DIFF_ENDLESS) {
-				mob = InfiniteBestiary.mob( Dungeon.depth );
                 mob.infiniteScaleMob(Dungeon.depth + 5);
 			} else {
                 mob.scaleMob();

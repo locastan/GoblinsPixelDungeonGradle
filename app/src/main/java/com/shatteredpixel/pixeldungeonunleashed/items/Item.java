@@ -315,7 +315,7 @@ public class Item implements Bundlable {
 		return cursed && cursedKnown;
 	}
 	
-	public boolean isUpgradable() { return (level < levelCap); }
+	public boolean isUpgradable() { return (level < levelCap || Dungeon.difficultyLevel == Dungeon.DIFF_ENDLESS); }
 
 	public boolean upgradeSucceds() {
 		String TXT_LOOKS_BETTER	= "your %s certainly looks better now";

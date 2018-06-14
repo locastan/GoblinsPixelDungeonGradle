@@ -1108,15 +1108,15 @@ public abstract class Level implements Bundlable {
 	}
 	
 	public String tileName( int tile ) {
-		
+
 		if (tile >= Terrain.WATER_TILES) {
-			return tileName( Terrain.WATER );
+			return "Water";
 		}
 		
 		if (tile != Terrain.CHASM && (Terrain.flags[tile] & Terrain.PIT) != 0) {
-			return tileName( Terrain.CHASM );
+			return "Chasm";
 		}
-		
+
 		switch (tile) {
 		case Terrain.CHASM:
 			return "Chasm";

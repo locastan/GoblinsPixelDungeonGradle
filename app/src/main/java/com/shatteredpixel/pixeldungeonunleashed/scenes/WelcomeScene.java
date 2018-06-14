@@ -48,6 +48,7 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TXT_Update =
 			"v0.1.5.4: Release\n"+
+                    "- Fixes and tweaks for Endless.\n"+
 					"- Progress Backup + Transfer.\n"+
 					"- Added Dart shooting Crossbow.\n"+
 					"- Added different darts.\n"+

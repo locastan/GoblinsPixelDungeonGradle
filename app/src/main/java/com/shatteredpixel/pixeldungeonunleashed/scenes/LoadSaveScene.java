@@ -46,6 +46,7 @@ import com.shatteredpixel.pixeldungeonunleashed.ui.Archs;
 import com.shatteredpixel.pixeldungeonunleashed.ui.RedButton;
 import com.shatteredpixel.pixeldungeonunleashed.ui.Window;
 import com.shatteredpixel.pixeldungeonunleashed.utils.Utils;
+import com.shatteredpixel.pixeldungeonunleashed.windows.WndError;
 import com.shatteredpixel.pixeldungeonunleashed.windows.WndOptions;
 import com.shatteredpixel.pixeldungeonunleashed.windows.WndStory;
 import com.watabou.noosa.BitmapText;
@@ -56,11 +57,8 @@ import com.watabou.utils.Bundle;
 
 import android.app.DownloadManager;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.widget.Toast;
 
 import static android.content.Context.DOWNLOAD_SERVICE;
 
@@ -530,22 +528,29 @@ public class LoadSaveScene extends PixelScene {
         }
     }
 
+    private static boolean checkPermission() {
+        int permit = PackageManager.PERMISSION_GRANTED;
+        return (ContextCompat.checkSelfPermission(Game.instance, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == permit) && (ContextCompat.checkSelfPermission(Game.instance, android.Manifest.permission.READ_EXTERNAL_STORAGE) == permit) && (ContextCompat.checkSelfPermission(Game.instance, android.Manifest.permission.INTERNET) == permit);
+    }
 
 
     protected static void BackupGames() {
         String gameSlotFolder = Game.instance.getFilesDir().toString();
         String downloadFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+ "/" + "GoblinsPDBackup.dat";
-
-        zipFileAtPath(gameSlotFolder,downloadFolder);
-        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString());
-        File file = new File(downloadFolder);
-        DownloadManager downloadManager = (DownloadManager) GoblinsPixelDungeon.instance.getSystemService(DOWNLOAD_SERVICE);
-        downloadManager.addCompletedDownload(file.getName(), file.getName(), true, "application/zip",file.getAbsolutePath(),file.length(),true);
-        if (Dungeon.hero == null) {
-            Game.switchScene(TitleScene.class);
+        if (checkPermission()) {
+            zipFileAtPath(gameSlotFolder, downloadFolder);
+            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString());
+            File file = new File(downloadFolder);
+            DownloadManager downloadManager = (DownloadManager) GoblinsPixelDungeon.instance.getSystemService(DOWNLOAD_SERVICE);
+            downloadManager.addCompletedDownload(file.getName(), file.getName(), true, "application/zip", file.getAbsolutePath(), file.length(), true);
+            if (Dungeon.hero == null) {
+                Game.switchScene(TitleScene.class);
+            } else {
+                InterlevelScene.mode = InterlevelScene.Mode.SAVE;
+                Game.switchScene(InterlevelScene.class);
+            }
         } else {
-            InterlevelScene.mode = InterlevelScene.Mode.SAVE;
-            Game.switchScene( InterlevelScene.class );
+            Game.scene().add(new WndError("Read/Write External Storage & Internet permissions allow us to work with backups. Please allow these permissions in App Settings."));
         }
     }
 
@@ -555,17 +560,20 @@ public class LoadSaveScene extends PixelScene {
         // Need to replace redundant "files" folder to prevent unzip into new subfolder "files" inside the "files" folder we are in already.
         gameSlotFolder = gameSlotFolder.replace("files","");
         String downloadFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+ "/" + "GoblinsPDBackup.dat";
-
-        try {
-            unZip(downloadFolder,gameSlotFolder);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (Dungeon.hero == null) {
-            Game.switchScene(TitleScene.class);
-        } else {
-            InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
-            Game.switchScene( InterlevelScene.class );
+        if (checkPermission()) {
+            try {
+                unZip(downloadFolder, gameSlotFolder);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (Dungeon.hero == null) {
+                Game.switchScene(TitleScene.class);
+            } else {
+                InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
+                Game.switchScene(InterlevelScene.class);
+            }
+        }  else {
+            Game.scene().add(new WndError("Read/Write External Storage & Internet permissions allow us to work with backups. Please allow these permissions in App Settings."));
         }
     }
 

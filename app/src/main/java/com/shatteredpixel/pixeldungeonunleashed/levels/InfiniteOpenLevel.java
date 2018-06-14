@@ -21,6 +21,7 @@ import com.shatteredpixel.pixeldungeonunleashed.Assets;
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.Actor;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Buff;
+import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Bestiary;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.BurningFist;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.ChaosMage;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.FetidRat;
@@ -46,26 +47,32 @@ public class InfiniteOpenLevel extends Level {
             case 0: // this is a sewer level
                 color1 = 0x48763c;
                 color2 = 0x59994a;
+                InfiniteBestiary.currentTheme = InfiniteBestiary.Themes.THEME_SEWERS;
                 break;
             case 1: // this is a prison level
                 color1 = 0x6a723d;
                 color2 = 0x88924c;
+                InfiniteBestiary.currentTheme = InfiniteBestiary.Themes.THEME_PRISON;
                 break;
             case 2: // this is a caves level
                 color1 = 0x534f3e;
                 color2 = 0xb9d661;
+                InfiniteBestiary.currentTheme = InfiniteBestiary.Themes.THEME_CAVES;
                 break;
             case 3: // this is a city level
                 color1 = 0x4b6636;
                 color2 = 0xf2f2f2;
+                InfiniteBestiary.currentTheme = InfiniteBestiary.Themes.THEME_CITY;
                 break;
             case 4: // this is a frozen level
                 color1 = 0x484876;
                 color2 = 0x4b5999;
+                InfiniteBestiary.currentTheme = InfiniteBestiary.Themes.THEME_FROZEN;
                 break;
             default: // this is a halls level
                 color1 = 0x801500;
                 color2 = 0xa68521;
+                InfiniteBestiary.currentTheme = InfiniteBestiary.Themes.THEME_HALLS;
                 break;
         }
 
@@ -278,7 +285,7 @@ public class InfiniteOpenLevel extends Level {
         int mobsToSpawn = nMobs();
 
         while (mobsToSpawn > 0) {
-            Mob mob = InfiniteBestiary.mob(Dungeon.depth);
+            Mob mob = Bestiary.mob(Dungeon.depth);
             if (mob != null) {
                 mob.infiniteScaleMob(Dungeon.depth);
                 mob.pos = randomDestination();
@@ -333,7 +340,7 @@ public class InfiniteOpenLevel extends Level {
                 int numMobs = nMobs();
                 while (mobs.size() < numMobs) {
 
-                    Mob mob = InfiniteBestiary.mutable( Dungeon.depth );
+                    Mob mob = Bestiary.mutable( Dungeon.depth );
                     if (mob != null) {
                         mob.infiniteScaleMob(Dungeon.depth);
 

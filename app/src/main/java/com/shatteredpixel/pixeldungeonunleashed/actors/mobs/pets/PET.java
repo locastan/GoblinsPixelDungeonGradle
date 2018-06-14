@@ -229,12 +229,12 @@ public abstract class PET extends Mob {
 	
 	@Override
 	protected boolean getCloser(int target) {
-		if (enemy != null && !callback) {
+		if (enemy != null && !callback && Dungeon.visible[enemy.pos]) {
 		   target = enemy.pos;		
 		} else if (checkNearbyHero()) {
 		   target = wanderLocation() != -1 ? wanderLocation() : Dungeon.hero.pos;	
 		   callback = false;
-		} else if(Dungeon.hero.invisible==0){
+		} else if (Dungeon.hero.invisible==0){
 			target = Dungeon.hero.pos;
 		} else {
 			target = wanderLocation() != -1 ? wanderLocation() : Dungeon.hero.pos;				

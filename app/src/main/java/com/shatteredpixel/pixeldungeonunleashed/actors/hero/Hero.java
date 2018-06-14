@@ -1403,7 +1403,7 @@ public class Hero extends Char {
 		boolean levelUp = false;
 		while (this.exp >= maxExp()) {
 			this.exp -= maxExp();
-			if (lvl < MAX_LEVEL) {
+			if (lvl < MAX_LEVEL || Dungeon.difficultyLevel == Dungeon.DIFF_ENDLESS) {
 				lvl++;
 				levelUp = true;
 
