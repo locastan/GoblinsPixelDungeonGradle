@@ -23,6 +23,7 @@ package com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee;
 
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.hero.Hero;
+import com.shatteredpixel.pixeldungeonunleashed.items.Item;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.missiles.darts.Dart;
 import com.shatteredpixel.pixeldungeonunleashed.sprites.ItemSpriteSheet;
 import com.shatteredpixel.pixeldungeonunleashed.ui.QuickSlotButton;
@@ -40,6 +41,18 @@ public class Crossbow extends MeleeWeapon {
 
     public Crossbow() {
         super( 4, 1f, 1f );
+    }
+
+    @Override
+    public Item upgrade(int n ) {
+        Item temp = super.upgrade(n);
+        QuickSlotButton.crossbow(true);
+        for (int i = 0; i < 2; i++) {
+            if (Dungeon.quickslot.getItem(i) instanceof Dart) {
+                ((Dart) Dungeon.quickslot.getItem(i)).updateCrossbow();
+            }
+        }
+        return temp;
     }
 
 	@Override

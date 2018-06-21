@@ -116,7 +116,11 @@ public class ShortSword extends MeleeWeapon {
 				
 				GLog.w( TXT_REFORGED, item.name() );
 				
-				((MeleeWeapon)item).safeUpgrade();
+				if (ShortSword.this.level > 1) {
+                    item.upgrade(ShortSword.this.level);
+                } else {
+                    ((MeleeWeapon) item).safeUpgrade();
+                }
 				curUser.spendAndNext( TIME_TO_REFORGE );
 				
 				Badges.validateItemLevelAquired( item );

@@ -354,7 +354,7 @@ public class WndHero extends WndTabbed {
 		private static final String TXT_CALL = "Call";
 		private static final String TXT_STAY = "Stay";
 		private static final String TXT_RELEASE = "Release";
-		private static final String TXT_SELECT = "What do you want to feed your pet?";
+		private static final String TXT_SELECT = "Select food for your pet:";
 
 		private CharSprite image;
 		private BitmapText name;

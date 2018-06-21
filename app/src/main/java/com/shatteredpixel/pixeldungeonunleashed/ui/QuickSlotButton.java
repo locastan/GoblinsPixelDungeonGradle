@@ -223,7 +223,6 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 	public static void refresh() {
 		for (int i = 0; i < instance.length; i++) {
 			if (instance[i] != null) {
-				instance[i].item(select(i));
 				if (Dungeon.hero.belongings.weapon instanceof Crossbow && select(i) instanceof Dart) {
 					instance[i].image.visible = true;
 				} else instance[i].image.visible = false;

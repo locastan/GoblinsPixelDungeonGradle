@@ -76,7 +76,7 @@ public class GardenPainter extends Painter {
 			}
 		}
 
-		if (Random.Int(10)==0 && (Calendar.getInstance().get(Calendar.MONTH)==4 || Calendar.getInstance().get(Calendar.MONTH)==5)){
+		if (Random.Int(10)==0 && (Calendar.getInstance().get(Calendar.MONTH) == Calendar.APRIL || Calendar.getInstance().get(Calendar.MONTH) == Calendar.MAY)){
 			int pos;
 			do {pos = room.random();}
 			while (level.heaps.get(pos) != null);

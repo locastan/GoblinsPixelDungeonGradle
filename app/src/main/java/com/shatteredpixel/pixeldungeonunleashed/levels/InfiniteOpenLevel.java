@@ -18,6 +18,7 @@
 package com.shatteredpixel.pixeldungeonunleashed.levels;
 
 import com.shatteredpixel.pixeldungeonunleashed.Assets;
+import com.shatteredpixel.pixeldungeonunleashed.Bones;
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.Actor;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Buff;
@@ -33,8 +34,11 @@ import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.RottingFist;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Tinkerer;
 import com.shatteredpixel.pixeldungeonunleashed.items.Generator;
 import com.shatteredpixel.pixeldungeonunleashed.items.Heap;
+import com.shatteredpixel.pixeldungeonunleashed.items.Item;
 import com.shatteredpixel.pixeldungeonunleashed.items.rings.RingOfWealth;
+import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.Scroll;
 import com.shatteredpixel.pixeldungeonunleashed.levels.painters.Painter;
+import com.shatteredpixel.pixeldungeonunleashed.levels.traps.FireTrap;
 import com.shatteredpixel.pixeldungeonunleashed.scenes.GameScene;
 import com.watabou.noosa.Scene;
 import com.watabou.utils.Random;
@@ -278,6 +282,22 @@ public class InfiniteOpenLevel extends Level {
                     type = Heap.Type.HEAP;
             }
             drop( Generator.random(), randomDestination() ).type = type;
+        }
+
+        for (Item item : itemsToSpawn) {
+            int cell = randomDestination();
+            if (item instanceof Scroll) {
+                while ((map[cell] == Terrain.TRAP || map[cell] == Terrain.SECRET_TRAP)
+                        && traps.get( cell ) instanceof FireTrap) {
+                    cell = randomDestination();
+                }
+            }
+            drop( item, cell ).type = Heap.Type.HEAP;
+        }
+
+        Item item = Bones.get();
+        if (item != null) {
+            drop( item, randomDestination() ).type = Heap.Type.REMAINS;
         }
     }
 
