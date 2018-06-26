@@ -43,6 +43,7 @@ import com.shatteredpixel.pixeldungeonunleashed.items.armor.MailArmor;
 import com.shatteredpixel.pixeldungeonunleashed.items.armor.PlateArmor;
 import com.shatteredpixel.pixeldungeonunleashed.items.armor.ScaleArmor;
 import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.TimekeepersHourglass;
+import com.shatteredpixel.pixeldungeonunleashed.items.bags.DartBelt;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.PotionBandolier;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.ScrollHolder;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.SeedPouch;
@@ -265,7 +266,7 @@ public class ShopPainter extends Painter {
 
 	private static void ChooseBag(Belongings pack){
 
-		int seeds = 0, scrolls = 0, potions = 0, wands = 0;
+		int seeds = 0, scrolls = 0, potions = 0, wands = 0, darts = 0;
 
         //count up items in the main bag, for bags which haven't yet been dropped.
         for (Item item : pack.backpack.items) {
@@ -277,24 +278,30 @@ public class ShopPainter extends Painter {
                 potions++;
             else if (!Dungeon.limitedDrops.wandBag.dropped() && item instanceof Wand)
                 wands++;
+            else if (!Dungeon.limitedDrops.dartBag.dropped() && item instanceof Dart)
+                darts++;
         }
         //then pick whichever valid bag has the most items available to put into it.
         //note that the order here gives a perference if counts are otherwise equal
-        if (seeds >= scrolls && seeds >= potions && seeds >= wands && !Dungeon.limitedDrops.seedBag.dropped()) {
+        if (seeds >= scrolls && seeds >= potions && seeds >= wands && seeds >= darts && !Dungeon.limitedDrops.seedBag.dropped()) {
             Dungeon.limitedDrops.seedBag.drop();
             itemsToSpawn.add( new SeedPouch() );
 
-        } else if (scrolls >= potions && scrolls >= wands && !Dungeon.limitedDrops.scrollBag.dropped()) {
+        } else if (scrolls >= potions && scrolls >= wands && scrolls >= darts && !Dungeon.limitedDrops.scrollBag.dropped()) {
             Dungeon.limitedDrops.scrollBag.drop();
             itemsToSpawn.add( new ScrollHolder() );
 
-        } else if (potions >= wands && !Dungeon.limitedDrops.potionBag.dropped()) {
+        } else if (potions >= wands && potions >= darts && !Dungeon.limitedDrops.potionBag.dropped()) {
             Dungeon.limitedDrops.potionBag.drop();
             itemsToSpawn.add( new PotionBandolier() );
 
-        } else if (!Dungeon.limitedDrops.wandBag.dropped()) {
+        } else if (wands >= darts && !Dungeon.limitedDrops.wandBag.dropped()) {
             Dungeon.limitedDrops.wandBag.drop();
             itemsToSpawn.add(new WandHolster());
+
+        } else if (!Dungeon.limitedDrops.dartBag.dropped()) {
+            Dungeon.limitedDrops.dartBag.drop();
+            itemsToSpawn.add(new DartBelt());
         }
     }
 

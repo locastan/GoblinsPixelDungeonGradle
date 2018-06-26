@@ -43,18 +43,6 @@ public class Crossbow extends MeleeWeapon {
         super( 4, 1f, 1f );
     }
 
-    @Override
-    public Item upgrade(int n ) {
-        Item temp = super.upgrade(n);
-        QuickSlotButton.crossbow(true);
-        for (int i = 0; i < 2; i++) {
-            if (Dungeon.quickslot.getItem(i) instanceof Dart) {
-                ((Dart) Dungeon.quickslot.getItem(i)).updateCrossbow();
-            }
-        }
-        return temp;
-    }
-
 	@Override
 	public boolean doEquip( Hero hero ) {
 		if (super.doEquip(hero)){

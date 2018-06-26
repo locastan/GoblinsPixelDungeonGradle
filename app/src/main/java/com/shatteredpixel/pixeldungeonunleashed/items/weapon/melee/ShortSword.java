@@ -41,7 +41,7 @@ public class ShortSword extends MeleeWeapon {
 	
 	public static final String AC_REFORGE	= "REFORGE";
 	
-	private static final String TXT_SELECT_WEAPON	= "Select a weapon to upgrade";
+	private static final String TXT_SELECT_WEAPON	= "Select weapon:";
 	
 	private static final String TXT_REFORGED =
 		"you reforged the short sword to upgrade your %s";

@@ -23,6 +23,7 @@
  */
 package com.shatteredpixel.pixeldungeonunleashed.levels.painters;
 
+import com.shatteredpixel.pixeldungeonunleashed.Challenges;
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.items.Generator;
 import com.shatteredpixel.pixeldungeonunleashed.items.Heap;
@@ -106,32 +107,31 @@ public class TrapsPainter extends Painter {
 
 		level.addItemToSpawn( new PotionOfLevitation() );
 	}
-	
-	private static Item prize( Level level ) {
 
-		Item prize;
+    private static Item prize( Level level ) {
 
-		if (Random.Int(4) != 0){
-			prize = level.findPrizeItem();
-			if (prize != null)
-				return prize;
-		}
-		
-		prize = Generator.random( Random.oneOf(
-			Generator.Category.WEAPON,
-			Generator.Category.ARMOR
-		) );
+        Item prize;
 
-		for (int i=0; i < 3; i++) {
-			Item another = Generator.random( Random.oneOf(
-				Generator.Category.WEAPON,
-				Generator.Category.ARMOR
-			) );
-			if (another.level > prize.level) {
-				prize = another;
-			}
-		}
-		
-		return prize;
-	}
+        if (Random.Int(3) != 0){
+            prize = level.findPrizeItem();
+            if (prize != null)
+                return prize;
+        }
+
+        //1 floor set higher in probability, never cursed
+        do {
+            if (Random.Int(2) == 0) {
+                prize = Generator.randomWeapon((Dungeon.depth / 5) + 1);
+            } else {
+                prize = Generator.randomArmor((Dungeon.depth / 5) + 1);
+            }
+        } while (prize.cursed || Challenges.isItemBlocked(prize));
+
+        //33% chance for an extra update.
+        if (Random.Int(3) == 0){
+            prize.upgrade();
+        }
+
+        return prize;
+    }
 }

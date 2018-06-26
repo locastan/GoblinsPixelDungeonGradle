@@ -48,10 +48,13 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TXT_Update =
 			"v0.1.5.4: Release\n"+
+                    "- Removed gold from Inventory.\n"+
                     "- Fixes and tweaks for Endless.\n"+
 					"- Progress Backup + Transfer.\n"+
 					"- Added Dart shooting Crossbow.\n"+
 					"- Added different darts.\n"+
+                    "- Added Dart Belt.\n"+
+                    "- Option to stab yrslf with darts.\n"+
 					"- Changed Brewing and Alchemy.\n"+
 					"- Fix: Tombstone inspection bug.\n"+
 					"- Fix: Hummingtl crash full bkpck.\n"+

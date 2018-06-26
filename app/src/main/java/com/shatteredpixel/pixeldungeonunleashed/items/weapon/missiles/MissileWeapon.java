@@ -167,7 +167,7 @@ public class MissileWeapon extends Weapon {
 			}
 		}
 
-		info.append( "\n\nAs this weapon is designed to be used at a distance, it is much less accurate if used at melee range.");
+		info.append( "\n\nThis weapon is designed to be used at range, it's much less accurate at melee range.");
 		
 		if (isEquipped( Dungeon.hero )) {
 			info.append( "\n\nYou hold the " + name + " at the ready." );

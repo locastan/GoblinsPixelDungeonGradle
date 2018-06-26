@@ -23,6 +23,8 @@
  */
 package com.shatteredpixel.pixeldungeonunleashed.levels.painters;
 
+import com.shatteredpixel.pixeldungeonunleashed.Challenges;
+import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Piranha;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Fingers;
 import com.shatteredpixel.pixeldungeonunleashed.items.Generator;
@@ -94,32 +96,31 @@ public class PoolPainter extends Painter {
 
 		}
 	}
-	
-	private static Item prize( Level level ) {
 
-		Item prize;
+    private static Item prize( Level level ) {
 
-		if (Random.Int(3) != 0){
-			prize = level.findPrizeItem();
-			if (prize != null)
-				return prize;
-		}
+        Item prize;
 
-		prize = Generator.random( Random.oneOf(
-				Generator.Category.WEAPON,
-				Generator.Category.ARMOR
-		) );
+        if (Random.Int(3) == 0){
+            prize = level.findPrizeItem();
+            if (prize != null)
+                return prize;
+        }
 
-		for (int i=0; i < 4; i++) {
-			Item another = Generator.random( Random.oneOf(
-					Generator.Category.WEAPON,
-					Generator.Category.ARMOR
-			) );
-			if (another.level > prize.level) {
-				prize = another;
-			}
-		}
+        //1 floor set higher in probability, never cursed
+        do {
+            if (Random.Int(2) == 0) {
+                prize = Generator.randomWeapon((Dungeon.depth / 5) + 1);
+            } else {
+                prize = Generator.randomArmor((Dungeon.depth / 5) + 1);
+            }
+        } while (prize.cursed || Challenges.isItemBlocked(prize));
 
-		return prize;
-	}
+        //33% chance for an extra update.
+        if (Random.Int(3) == 0){
+            prize.upgrade();
+        }
+
+        return prize;
+    }
 }

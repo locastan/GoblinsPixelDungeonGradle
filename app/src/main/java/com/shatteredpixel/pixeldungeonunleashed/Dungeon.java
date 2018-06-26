@@ -123,6 +123,7 @@ public class Dungeon {
 		scrollBag,
 		potionBag,
 		wandBag,
+        dartBag,
         ankhChain;
 
 		public int count = 0;

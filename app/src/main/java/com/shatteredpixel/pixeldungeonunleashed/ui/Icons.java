@@ -61,6 +61,7 @@ public enum Icons {
 	CHALLENGE_ON,
 	RESUME,
     ANKH_CHAIN,
+    DART_BELT,
 	ALCHEMY,
 	CROSSY;
 
@@ -173,6 +174,9 @@ public enum Icons {
 		case CROSSY:
 			icon.frame(icon.texture.uvRect(0, 64, 16, 80));
 			break;
+        case DART_BELT:
+            icon.frame(icon.texture.uvRect(16, 64, 26, 74));
+            break;
 		}
 		return icon;
 	}

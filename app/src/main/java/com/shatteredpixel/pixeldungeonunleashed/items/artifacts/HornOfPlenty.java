@@ -68,7 +68,7 @@ public class HornOfPlenty extends Artifact {
 	public static final String AC_EAT = "EAT";
 	public static final String AC_STORE = "STORE";
 
-	protected String inventoryTitle = "Select a piece of food";
+	protected String inventoryTitle = "Select food:";
 	protected WndBag.Mode mode = WndBag.Mode.FOOD;
 
 	@Override

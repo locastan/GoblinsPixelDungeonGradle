@@ -31,6 +31,7 @@ import java.util.Calendar;
 import com.shatteredpixel.pixeldungeonunleashed.*;
 import com.shatteredpixel.pixeldungeonunleashed.items.Honeypot;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.AnkhChain;
+import com.shatteredpixel.pixeldungeonunleashed.items.bags.DartBelt;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.PotionBandolier;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.ScrollHolder;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.SeedPouch;
@@ -727,6 +728,8 @@ public class GameScene extends PixelScene {
 					WndBag.getBag( PotionBandolier.class, listener, mode, title ) :
 				mode == Mode.WAND ?
 					WndBag.getBag( WandHolster.class, listener, mode, title ) :
+                mode == Mode.DART ?
+                        WndBag.getBag( DartBelt.class, listener, mode, title ) :
 				mode == Mode.KEY ?
 						WndBag.getBag( AnkhChain.class, listener, mode, title ) :
 				WndBag.lastBag( listener, mode, title );

@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.pixeldungeonunleashed.items.weapon.missiles.darts;
 
+import com.shatteredpixel.pixeldungeonunleashed.Assets;
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.Char;
 import com.shatteredpixel.pixeldungeonunleashed.actors.hero.Hero;
@@ -28,11 +29,15 @@ import com.shatteredpixel.pixeldungeonunleashed.items.Item;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.Crossbow;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.missiles.MissileWeapon;
 import com.shatteredpixel.pixeldungeonunleashed.sprites.ItemSpriteSheet;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
 
 public class Dart extends MissileWeapon {
 
     private Crossbow bow;
+    public static final String AC_STAB	= "STAB";
 
 	{
 		name = "dart";
@@ -63,8 +68,34 @@ public class Dart extends MissileWeapon {
 	public String desc() {
 		return
 				"These simple metal spikes are weighted to fly true and " +
-						"sting their prey with a flick of the wrist.";
+						"sting their prey with a flick of the wrist.\n\n" +
+                        "You can also choose to stab yourself if you prefer.";
 	}
+
+    @Override
+    public ArrayList<String> actions(Hero hero) {
+        ArrayList<String> actions = super.actions( hero );
+        actions.add(AC_STAB);
+        return actions;
+    }
+
+    @Override
+    public void execute(Hero hero, String action) {
+        if (action.equals(AC_STAB)) {
+            hero.spend(1f);
+            // remove crossbow damage and enchantments from stabbing yourself.
+            bow = null;
+            int dmg = damageRoll(hero);
+            proc(hero,hero,dmg);
+            int effectiveDamage = hero.attackProc( hero, dmg );
+            effectiveDamage = hero.defenseProc( hero, effectiveDamage );
+            Sample.INSTANCE.play( Assets.SND_HIT, 1, 1, Random.Float( 0.8f, 1.25f ) );
+            hero.damage(effectiveDamage,hero);
+            // put crossbow back
+            updateCrossbow();
+        } else
+            super.execute(hero, action);
+    }
 	
 	public void updateCrossbow(){
 		if (Dungeon.hero.belongings.weapon instanceof Crossbow){

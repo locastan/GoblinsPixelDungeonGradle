@@ -64,7 +64,7 @@ public class AlchemistsToolkit extends Artifact {
 
 	private int seedsToPotion = 0;
 
-	protected String inventoryTitle = "Select a potion";
+	protected String inventoryTitle = "Select potion:";
 	protected WndBag.Mode mode = WndBag.Mode.POTION;
 
 	public AlchemistsToolkit() {

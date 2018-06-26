@@ -42,7 +42,7 @@ import com.shatteredpixel.pixeldungeonunleashed.windows.WndBag;
 
 public class QuickSlotButton extends Button implements WndBag.Listener {
 
-	private static final String TXT_SELECT_ITEM = "Select an item for the quickslot";
+	private static final String TXT_SELECT_ITEM = "Select item:";
 
 
 	private static QuickSlotButton[] instance = new QuickSlotButton[4];
@@ -62,6 +62,7 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 		item(select(slotNum));
 		
 		instance[slotNum] = this;
+        instance[slotNum].image.visible = (Dungeon.hero.belongings.weapon instanceof Crossbow && select(slotNum) instanceof Dart);
 	}
 	
 	@Override
@@ -130,7 +131,7 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 
 		image.x = PixelScene.align(x + (width - image.width) / 2);
 		image.y = PixelScene.align(y + (height - image.height) / 2);
-		//image.alpha(0.6f);
+		image.alpha(0.65f);
 	}
 	
 	@Override
@@ -226,6 +227,7 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 				if (Dungeon.hero.belongings.weapon instanceof Crossbow && select(i) instanceof Dart) {
 					instance[i].image.visible = true;
 				} else instance[i].image.visible = false;
+                instance[i].item(select(i));
 			}
 		}
 	}
