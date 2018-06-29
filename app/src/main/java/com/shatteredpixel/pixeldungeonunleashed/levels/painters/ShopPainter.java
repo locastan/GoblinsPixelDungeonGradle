@@ -267,18 +267,25 @@ public class ShopPainter extends Painter {
 	private static void ChooseBag(Belongings pack){
 
 		int seeds = 0, scrolls = 0, potions = 0, wands = 0, darts = 0;
+        boolean pouch = false, holder = false, bandolier = false, holster = false, belt = false;
 
-        //count up items in the main bag, for bags which haven't yet been dropped.
+        if (pack.backpack.items.contains(SeedPouch.class.getSimpleName())) { pouch = true; }
+        if (pack.backpack.items.contains(ScrollHolder.class.getSimpleName())) { holder = true; }
+        if (pack.backpack.items.contains(PotionBandolier.class.getSimpleName())) { bandolier = true; }
+        if (pack.backpack.items.contains(WandHolster.class.getSimpleName())) { holster = true; }
+        if (pack.backpack.items.contains(DartBelt.class.getSimpleName())) { belt = true; }
+
+        //count up items in the main bag, for bags which are not in players inventory or have already dropped in any mode besides endless.
         for (Item item : pack.backpack.items) {
-            if (!Dungeon.limitedDrops.seedBag.dropped() && item instanceof Plant.Seed)
+            if (!pouch && !Dungeon.limitedDrops.seedBag.dropped() && item instanceof Plant.Seed )
                 seeds++;
-            else if (!Dungeon.limitedDrops.scrollBag.dropped() && item instanceof Scroll)
+            else if (!holder && !Dungeon.limitedDrops.scrollBag.dropped()&& item instanceof Scroll)
                 scrolls++;
-            else if (!Dungeon.limitedDrops.potionBag.dropped() && item instanceof Potion)
+            else if (!bandolier && !Dungeon.limitedDrops.potionBag.dropped() && item instanceof Potion)
                 potions++;
-            else if (!Dungeon.limitedDrops.wandBag.dropped() && item instanceof Wand)
+            else if (!holster && !Dungeon.limitedDrops.wandBag.dropped() && item instanceof Wand)
                 wands++;
-            else if (!Dungeon.limitedDrops.dartBag.dropped() && item instanceof Dart)
+            else if (!belt && !Dungeon.limitedDrops.dartBag.dropped() && item instanceof Dart)
                 darts++;
         }
         //then pick whichever valid bag has the most items available to put into it.

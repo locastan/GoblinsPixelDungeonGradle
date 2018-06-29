@@ -36,7 +36,7 @@ public class ScrollOfUpgrade extends InventoryScroll {
 		name = "Scroll of Upgrade";
 		initials = "Up";
 
-		inventoryTitle = "Select an item to upgrade";
+		inventoryTitle = "Upgrade item:";
 		mode = WndBag.Mode.UPGRADEABLE;
 
 		bones = true;
