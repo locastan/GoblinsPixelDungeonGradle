@@ -4,7 +4,7 @@ Gradle port of Goblins PD
 This is the new Gradle port of "Goblins Pixel Dungeon" (GPD) by Mario Braun. 
 
 GPD is a fandom modification based on Unleashed PD by David Mitchell, wich in itself is based on Shattered Pixel Dungeon by Evan Debenham,
-with artwork, items, characters and lore from Tarol Hunt-Stephens at www.goblinscomic.org. :)
+with artwork, items, characters and lore from Ellipsis Hunt-Stephens at www.goblinscomic.org. :)
 
 Google Play: https://play.google.com/store/apps/details?id=com.locastan.pixeldungeongoblins
 Amazon Apps: https://www.amazon.de/dp/B01M4O8OLZ/
