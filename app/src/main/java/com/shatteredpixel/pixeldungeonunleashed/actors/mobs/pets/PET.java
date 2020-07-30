@@ -140,7 +140,7 @@ public abstract class PET extends Mob {
 		}
 		
 		if (goaways>2){
-			flee();
+			flee(false);
 		}
 		
 		super.damage(dmg,src);
@@ -175,9 +175,11 @@ public abstract class PET extends Mob {
 		return speed;
 	}
 	
-	public void flee() {
+	public void flee(boolean ownerisdead) {
 		Dungeon.hero.haspet=false;
-	    GLog.n("Your %s knows when it's not wanted!",name);
+        if (ownerisdead) {
+            GLog.w("Your %s retreats to fight another day.", name);
+        } else GLog.n("Your %s knows when it's not wanted!", name);
 		destroy();
 		sprite.killAndErase();
 		CellEmitter.get(pos).burst(ElmoParticle.FACTORY, 6);
@@ -229,12 +231,12 @@ public abstract class PET extends Mob {
 	
 	@Override
 	protected boolean getCloser(int target) {
-		if (enemy != null && !callback) {
+		if (enemy != null && !callback && Dungeon.visible[enemy.pos]) {
 		   target = enemy.pos;		
 		} else if (checkNearbyHero()) {
 		   target = wanderLocation() != -1 ? wanderLocation() : Dungeon.hero.pos;	
 		   callback = false;
-		} else if(Dungeon.hero.invisible==0){
+		} else if (Dungeon.hero.invisible==0){
 			target = Dungeon.hero.pos;
 		} else {
 			target = wanderLocation() != -1 ? wanderLocation() : Dungeon.hero.pos;				

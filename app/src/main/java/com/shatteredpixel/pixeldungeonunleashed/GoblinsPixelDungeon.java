@@ -36,8 +36,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
+import com.shatteredpixel.pixeldungeonunleashed.windows.WndError;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
@@ -144,11 +144,8 @@ public class GoblinsPixelDungeon extends Game {
 
     public static void requestReadWritePermission() {
 
-        if (ActivityCompat.shouldShowRequestPermissionRationale(instance, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            Toast.makeText(instance, "Read/Write External Storage & Internet permissions allow us to work with backups. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
-        } else {
-            ActivityCompat.requestPermissions(instance, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.INTERNET}, PERMISSION_REQUEST_CODE);
-        }
+        ActivityCompat.requestPermissions(instance, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.INTERNET}, PERMISSION_REQUEST_CODE);
+
     }
 
 	public static void switchNoFade( Class<? extends PixelScene> c ) {

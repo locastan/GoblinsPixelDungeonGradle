@@ -55,7 +55,7 @@ public class HummingTool extends Artifact {
 	public static final String AC_FEED = "FEED";
     private Integer usecount = 0;
 
-	protected String inventoryTitle = "Select a Key";
+	protected String inventoryTitle = "Select key:";
 	protected WndBag.Mode mode = WndBag.Mode.KEY;
 
 

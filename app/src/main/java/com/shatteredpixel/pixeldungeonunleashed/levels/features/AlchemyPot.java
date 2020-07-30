@@ -36,7 +36,7 @@ import java.util.Iterator;
 
 public class AlchemyPot {
 
-	private static final String TXT_SELECT_SEED	= "Select a seed to throw";
+	private static final String TXT_SELECT_SEED	= "Select seed:";
 	private static final String TXT_POT	        = "Alchemy Pot";
 	private static final String TXT_FRUIT	    = "Cook Yumyuck Moss";
 	private static final String TXT_POTION	    = "Brew a Potion";

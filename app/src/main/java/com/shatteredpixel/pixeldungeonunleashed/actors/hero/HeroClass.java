@@ -36,8 +36,11 @@ import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.AlchemistsToolki
 import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.ShieldOfWonders;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.AnkhChain;
+import com.shatteredpixel.pixeldungeonunleashed.items.bags.DartBelt;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.PotionBandolier;
+import com.shatteredpixel.pixeldungeonunleashed.items.bags.ScrollHolder;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.SeedPouch;
+import com.shatteredpixel.pixeldungeonunleashed.items.bags.WandHolster;
 import com.shatteredpixel.pixeldungeonunleashed.items.food.Food;
 import com.shatteredpixel.pixeldungeonunleashed.items.potions.PotionOfExperience;
 import com.shatteredpixel.pixeldungeonunleashed.items.potions.PotionOfHealing;
@@ -49,14 +52,12 @@ import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfMagicMappi
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfRemoveCurse;
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.Crossbow;
-import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.Glaive;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.pixeldungeonunleashed.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.Dagger;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.ShortSword;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.missiles.darts.Dart;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.missiles.Boomerang;
-import com.shatteredpixel.pixeldungeonunleashed.items.weapon.missiles.darts.HealingDart;
 import com.watabou.utils.Bundle;
 
 public enum HeroClass {
@@ -160,12 +161,13 @@ public enum HeroClass {
 	public static void testHero(Hero hero) {
 		hero.HT = 80;
 		hero.HP = 80;
-		new ShieldOfWonders().identify().collect();
 		new AnkhChain().collect();
-        new PotionBandolier().collect();
+        new DartBelt().collect();
         new SeedPouch().collect();
+        new PotionBandolier().collect();
+        new ScrollHolder().collect();
+        new WandHolster().collect();
         new PlateArmor().identify().upgrade(10).collect();
-        new AlchemistsToolkit().identify().collect();
 		new Dart().quantity(14).collect();
 		new Crossbow().identify().collect();
 		// things we only want a few of..

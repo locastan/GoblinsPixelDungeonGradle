@@ -42,7 +42,7 @@ import java.util.ArrayList;
 
 public class Weightstone extends Item {
 
-	private static final String TXT_SELECT_WEAPON	= "Select a weapon to balance";
+	private static final String TXT_SELECT_WEAPON	= "Balance weapon:";
 	private static final String TXT_LIGHT			= "you balanced your %s to make it lighter";
 	private static final String TXT_HEAVY		= "you balanced your %s to make it heavier";
 

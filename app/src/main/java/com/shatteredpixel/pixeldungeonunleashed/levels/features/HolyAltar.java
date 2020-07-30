@@ -30,7 +30,7 @@ import com.shatteredpixel.pixeldungeonunleashed.scenes.GameScene;
 import com.shatteredpixel.pixeldungeonunleashed.windows.WndBag;
 
 public class HolyAltar {
-    private static final String TXT_SELECT_ITEM	= "Select an item to donate";
+    private static final String TXT_SELECT_ITEM	= "Select item:";
 
     public static Hero hero;
     public static int pos;

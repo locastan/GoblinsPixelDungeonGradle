@@ -23,6 +23,7 @@ import com.shatteredpixel.pixeldungeonunleashed.Challenges;
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.Actor;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Buff;
+import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Bestiary;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.ChaosMage;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.FetidRat;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.GnollTrickster;
@@ -718,7 +719,7 @@ public class InfiniteLevel  extends Level {
                 stdRoomIter = stdRooms.iterator();
             Room roomToSpawn = stdRoomIter.next();
 
-            Mob mob = InfiniteBestiary.mob(Dungeon.depth);
+            Mob mob = Bestiary.mob(Dungeon.depth);
             if (mob != null) {
                 mob.infiniteScaleMob(Dungeon.depth);
                 mob.pos = roomToSpawn.random();

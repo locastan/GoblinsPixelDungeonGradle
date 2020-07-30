@@ -430,7 +430,7 @@ public class Potion extends Item {
 
 		@Override
 		public Item sampleOutput(ArrayList<Item> ingredients) {
-			return new WndBag.Placeholder(ItemSpriteSheet.BANDOLIER){
+			return new WndBag.Placeholder(ItemSpriteSheet.RAND_POT){
 				{
 					name = "random potion";
 				}

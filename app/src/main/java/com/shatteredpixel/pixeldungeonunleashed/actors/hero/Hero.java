@@ -1403,7 +1403,7 @@ public class Hero extends Char {
 		boolean levelUp = false;
 		while (this.exp >= maxExp()) {
 			this.exp -= maxExp();
-			if (lvl < MAX_LEVEL) {
+			if (lvl < MAX_LEVEL || Dungeon.difficultyLevel == Dungeon.DIFF_ENDLESS) {
 				lvl++;
 				levelUp = true;
 
@@ -1614,7 +1614,10 @@ public class Hero extends Char {
 		if (ankh == null) {
 			
 			reallyDie( cause );
-			
+            if(haspet) {
+                PET heropet = checkpet();
+                heropet.flee(true);
+            }
 		} else {
 			
 			Dungeon.deleteGame( Dungeon.hero.heroClass, false );
@@ -1644,7 +1647,7 @@ public class Hero extends Char {
 		}
 		
 		Bones.leave();
-		
+
 		Dungeon.observe();
 		// Removed because it allows to know items on loading the game from a slot after death.
 		//Dungeon.hero.belongings.identify();

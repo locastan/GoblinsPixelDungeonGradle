@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.Actor;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Bestiary;
+import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.InfiniteBestiary;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Mob;
 import com.shatteredpixel.pixeldungeonunleashed.items.Heap;
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfTeleportation;
@@ -50,7 +51,7 @@ public class SummoningTrap extends Trap {
 	@Override
 	public void activate() {
 
-		if (Dungeon.bossLevel()) {
+		if (Dungeon.bossLevel() && (Dungeon.difficultyLevel != Dungeon.DIFF_ENDLESS)) {
 			return;
 		}
 
@@ -86,8 +87,11 @@ public class SummoningTrap extends Trap {
 
 		for (Integer point : respawnPoints) {
 			Mob mob = Bestiary.mob( Dungeon.depth );
-			mob.scaleMob();
-
+			if (Dungeon.difficultyLevel == Dungeon.DIFF_ENDLESS) {
+                mob.infiniteScaleMob(Dungeon.depth + 5);
+			} else {
+                mob.scaleMob();
+            }
 			mob.state = mob.WANDERING;
 			GameScene.add( mob, DELAY );
 			ScrollOfTeleportation.appear( mob, point );

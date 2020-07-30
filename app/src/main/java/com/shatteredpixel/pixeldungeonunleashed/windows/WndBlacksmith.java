@@ -56,7 +56,7 @@ public class WndBlacksmith extends Window {
 		"Ok, a deal is a deal, dat's what I can do for you: I can weld " +
 		"two items together and improve the better of the two.";
 	private static final String TXT_SELECT =
-		"Select an item to reforge";
+		"Select item:";
 	private static final String TXT_REFORGE =
 		"Reforge them";
 	

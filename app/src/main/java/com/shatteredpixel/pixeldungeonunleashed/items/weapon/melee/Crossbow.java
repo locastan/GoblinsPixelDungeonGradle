@@ -23,6 +23,7 @@ package com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee;
 
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.hero.Hero;
+import com.shatteredpixel.pixeldungeonunleashed.items.Item;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.missiles.darts.Dart;
 import com.shatteredpixel.pixeldungeonunleashed.sprites.ItemSpriteSheet;
 import com.shatteredpixel.pixeldungeonunleashed.ui.QuickSlotButton;
@@ -33,7 +34,6 @@ public class Crossbow extends MeleeWeapon {
 	{
 		name = "crossbow";
 		image = ItemSpriteSheet.CROSSBOW;
-		STR = 14;
 		MAX = (4*(tier+1) + level*(tier));     //20 base, down from 25 +4 per level, down from +5
 		
 		//check Dart.class for additional properties

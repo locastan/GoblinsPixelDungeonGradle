@@ -97,7 +97,7 @@ public class WndAlchemy extends Window {
 							item = null;
 							slot.item(new WndBag.Placeholder(ItemSpriteSheet.SMTH));
 						}
-						GameScene.selectItem(itemSelector, WndBag.Mode.ALCHEMY, "select");
+						GameScene.selectItem(itemSelector, WndBag.Mode.ALCHEMY, "select:");
 					}
 				};
 				inputs[i].setRect(10, h, BTN_SIZE, BTN_SIZE);

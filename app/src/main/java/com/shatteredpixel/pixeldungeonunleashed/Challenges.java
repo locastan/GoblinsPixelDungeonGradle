@@ -23,6 +23,16 @@
  */
 package com.shatteredpixel.pixeldungeonunleashed;
 
+import com.shatteredpixel.pixeldungeonunleashed.items.Dewdrop;
+import com.shatteredpixel.pixeldungeonunleashed.items.Item;
+import com.shatteredpixel.pixeldungeonunleashed.items.armor.Armor;
+import com.shatteredpixel.pixeldungeonunleashed.items.armor.ClothArmor;
+import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.HornOfPlenty;
+import com.shatteredpixel.pixeldungeonunleashed.items.food.Food;
+import com.shatteredpixel.pixeldungeonunleashed.items.food.OverpricedRation;
+import com.shatteredpixel.pixeldungeonunleashed.items.food.Yumyuck;
+import com.shatteredpixel.pixeldungeonunleashed.items.potions.PotionOfHealing;
+
 public class Challenges {
 
 	public static final int NO_FOOD				= 1;
@@ -47,4 +57,37 @@ public class Challenges {
 			NO_FOOD, NO_ARMOR, NO_HEALING, NO_HERBALISM, SWARM_INTELLIGENCE, DARKNESS, NO_SCROLLS
 	};
 
+    public static boolean isItemBlocked( Item item ){
+        if (Dungeon.isChallenged(NO_FOOD)){
+            if (item instanceof Food && !(item instanceof OverpricedRation)) {
+                return true;
+            } else if (item instanceof HornOfPlenty){
+                return true;
+            }
+        }
+
+        if (Dungeon.isChallenged(NO_ARMOR)){
+            if (item instanceof Armor && !(item instanceof ClothArmor)) {
+                return true;
+            }
+        }
+
+        if (Dungeon.isChallenged(NO_HEALING)){
+            if (item instanceof PotionOfHealing){
+                return true;
+            } else if (item instanceof Yumyuck
+                    && ((Yumyuck) item).potionAttrib instanceof PotionOfHealing){
+                return true;
+            }
+        }
+
+        if (Dungeon.isChallenged(NO_HERBALISM)){
+            if (item instanceof Dewdrop) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
 }

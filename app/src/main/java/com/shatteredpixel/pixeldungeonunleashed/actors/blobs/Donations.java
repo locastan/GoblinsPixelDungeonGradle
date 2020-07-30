@@ -143,6 +143,7 @@ public class Donations extends Blob {
                             GLog.p("Oops..there are none left of those...here have a ring!");
                             item : Generator.random(Generator.Category.RING);
                         }
+                        item.cursed = false;
                         GLog.p("You are rewarded with: " + item.name());
                         throwItem(cell, item);
                         hero.donatedLoot = 0;
@@ -196,6 +197,7 @@ public class Donations extends Blob {
                                 wpn.enchant(Instability.class.newInstance());
                                 break;
                         }
+                        wpn.cursed = false;
                         throwItem(cell, wpn);
                         hero.donatedLoot -= 150;
                         GLog.p("you are rewarded with a magical weapon.");
@@ -231,17 +233,14 @@ public class Donations extends Blob {
                 GLog.p("Herbert accepts your donation...");
             }
             heap.donate();
-            return;
         } else if (heap != null) {
             if ((heap.peek() instanceof Artifact || heap.peek().level >= 5)) {
                 GLog.p("Herbert grumbles, but accepts your donation and allows you to donate more.");
                 hero.donatedLoot = 0;
                 heap.donate();
-                return;
             } else {
                 GLog.n("Herbert holds a grudge. You need to donate a very powerful item to please him now...");
                 throwItem(cell, heap.pickUp());
-                return;
             }
         }
     }

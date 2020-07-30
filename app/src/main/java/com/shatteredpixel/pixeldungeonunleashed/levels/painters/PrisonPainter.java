@@ -22,6 +22,7 @@ import com.shatteredpixel.pixeldungeonunleashed.items.Generator;
 import com.shatteredpixel.pixeldungeonunleashed.items.Gold;
 import com.shatteredpixel.pixeldungeonunleashed.items.Heap;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.AnkhChain;
+import com.shatteredpixel.pixeldungeonunleashed.items.bags.SeedPouch;
 import com.shatteredpixel.pixeldungeonunleashed.items.keys.IronKey;
 import com.shatteredpixel.pixeldungeonunleashed.levels.Level;
 import com.shatteredpixel.pixeldungeonunleashed.levels.Room;
@@ -56,7 +57,7 @@ public class PrisonPainter extends Painter {
             level.drop(new Gold().random(), pos).type = Heap.Type.SKELETON;
         }
 
-        if (Random.Int(2)==0 && !Dungeon.limitedDrops.ankhChain.dropped()){
+        if (Random.Int(2)==0 && !Dungeon.limitedDrops.ankhChain.dropped() && !(Dungeon.hero.belongings.backpack.items.contains(AnkhChain.class.getSimpleName()))){
             do {
                 pos = room.random();
             } while (level.heaps.get(pos) != null);

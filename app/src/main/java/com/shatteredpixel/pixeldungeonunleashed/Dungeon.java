@@ -123,13 +123,16 @@ public class Dungeon {
 		scrollBag,
 		potionBag,
 		wandBag,
+        dartBag,
         ankhChain;
 
 		public int count = 0;
 
-		//for items which can only be dropped once, should directly access count otherwise.
+		//for items which can only be dropped once, should directly access count otherwise. Adjusted to endless diff for additional bags and stuff if you missed one.
 		public boolean dropped(){
-			return count != 0;
+            if (Dungeon.difficultyLevel != Dungeon.DIFF_ENDLESS) {
+                return count != 0;
+            } else return false;
 		}
 		public void drop(){
 			count = 1;

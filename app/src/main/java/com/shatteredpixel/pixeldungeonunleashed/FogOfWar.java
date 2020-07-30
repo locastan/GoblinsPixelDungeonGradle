@@ -36,7 +36,7 @@ import com.shatteredpixel.pixeldungeonunleashed.scenes.GameScene;
 public class FogOfWar extends Image {
 
 	private static final int VISIBLE	= 0x00000000;
-	private static final int VISITED	= 0xcc111111;
+	private static final int VISITED	= 0xa6111111; // reduced alpha to "a6" 65% instead of "cc" 80%
 	private static final int MAPPED		= 0xcc442211;
 	private static final int INVISIBLE	= 0xFF000000;
 	

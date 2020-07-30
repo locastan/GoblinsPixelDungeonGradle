@@ -40,7 +40,7 @@ public class IncendiaryDart extends TippedDart {
 		name = "incendiary dart";
 		image = ItemSpriteSheet.INCENDIARY_DART;
 
-		STR = 12;
+		STR = 10;
 	}
 	
 	@Override

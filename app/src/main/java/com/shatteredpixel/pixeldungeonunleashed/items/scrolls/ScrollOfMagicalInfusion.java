@@ -40,7 +40,7 @@ public class ScrollOfMagicalInfusion extends InventoryScroll {
 		name = "Scroll of Magical Infusion";
 		initials = "MaI";
 
-		inventoryTitle = "Select an item to infuse";
+		inventoryTitle = "Infuse item:";
 		mode = WndBag.Mode.ENCHANTABLE;
 
 		bones = true;

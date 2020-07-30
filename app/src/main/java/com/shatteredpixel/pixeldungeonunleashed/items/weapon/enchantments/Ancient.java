@@ -17,6 +17,7 @@
  */
 package com.shatteredpixel.pixeldungeonunleashed.items.weapon.enchantments;
 
+import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.Char;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.Weapon;
 import com.shatteredpixel.pixeldungeonunleashed.sprites.ItemSprite;
@@ -51,7 +52,7 @@ public class Ancient extends Weapon.Enchantment  {
             specialAttack = false;
         }
 
-        if ((weapon.level < weapon.levelCap) && ((curDamage + damage) >= defHP)) {
+        if ((weapon.level < weapon.levelCap || Dungeon.difficultyLevel == Dungeon.DIFF_ENDLESS) && ((curDamage + damage) >= defHP)) {
             // every 8 killing blows this weapon has a chance at an upgrade
             numKills++;
             if (numKills > 10) {

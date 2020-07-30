@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.Artifact;
+import com.shatteredpixel.pixeldungeonunleashed.items.bags.DartBelt;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.PotionBandolier;
 import com.watabou.noosa.Game;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Acidic;
@@ -128,6 +129,7 @@ public enum Badge {
 		BAG_BOUGHT_SCROLL_HOLDER,
 		BAG_BOUGHT_POTION_BANDOLIER,
 		BAG_BOUGHT_WAND_HOLSTER,
+        BAG_BOUGHT_DART_BELT,
 		ALL_BAGS_BOUGHT( "All bags bought", 23 ),
 		DEATH_FROM_FIRE( "Death from fire", 24 ),
 		DEATH_FROM_POISON( "Death from poison", 25 ),
@@ -565,7 +567,9 @@ public enum Badge {
 			badge = Badge.BAG_BOUGHT_POTION_BANDOLIER;
 		} else if (bag instanceof WandHolster) {
 			badge = Badge.BAG_BOUGHT_WAND_HOLSTER;
-		}
+		} else if (bag instanceof DartBelt) {
+            badge = Badge.BAG_BOUGHT_DART_BELT;
+        }
 		
 		if (badge != null) {
 			
@@ -575,6 +579,7 @@ public enum Badge {
 				local.contains( Badge.BAG_BOUGHT_SEED_POUCH ) &&
 				local.contains( Badge.BAG_BOUGHT_SCROLL_HOLDER ) &&
 				local.contains( Badge.BAG_BOUGHT_POTION_BANDOLIER ) &&
+                local.contains( Badge.BAG_BOUGHT_DART_BELT ) &&
 				local.contains( Badge.BAG_BOUGHT_WAND_HOLSTER )) {
 						
 					badge = Badge.ALL_BAGS_BOUGHT;

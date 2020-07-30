@@ -33,7 +33,7 @@ import com.shatteredpixel.pixeldungeonunleashed.windows.WndOptions;
 
 public abstract class InventoryScroll extends Scroll {
 
-	protected String inventoryTitle = "Select an item";
+	protected String inventoryTitle = "Select item:";
 	protected WndBag.Mode mode = WndBag.Mode.ALL;
 	
 	private static final String TXT_WARNING	=

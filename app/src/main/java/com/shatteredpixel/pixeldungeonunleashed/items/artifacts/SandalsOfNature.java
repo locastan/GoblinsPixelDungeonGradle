@@ -64,7 +64,7 @@ public class SandalsOfNature extends Artifact {
 	public static final String AC_FEED = "FEED";
 	public static final String AC_ROOT = "ROOT";
 
-	protected String inventoryTitle = "Select a seed";
+	protected String inventoryTitle = "Select seed:";
 	protected WndBag.Mode mode = WndBag.Mode.SEED;
 
 	public ArrayList<String> seeds = new ArrayList<>();

@@ -35,6 +35,7 @@ import com.shatteredpixel.pixeldungeonunleashed.items.Item;
 import com.shatteredpixel.pixeldungeonunleashed.items.armor.Armor;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.AnkhChain;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.Bag;
+import com.shatteredpixel.pixeldungeonunleashed.items.bags.DartBelt;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.PotionBandolier;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.ScrollHolder;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.SeedPouch;
@@ -53,6 +54,7 @@ import com.shatteredpixel.pixeldungeonunleashed.plants.Plant.Seed;
 import com.shatteredpixel.pixeldungeonunleashed.plants.YumyuckMoss;
 import com.shatteredpixel.pixeldungeonunleashed.scenes.GameScene;
 import com.shatteredpixel.pixeldungeonunleashed.scenes.PixelScene;
+import com.shatteredpixel.pixeldungeonunleashed.sprites.ItemSprite;
 import com.shatteredpixel.pixeldungeonunleashed.sprites.ItemSpriteSheet;
 import com.shatteredpixel.pixeldungeonunleashed.ui.Icons;
 import com.shatteredpixel.pixeldungeonunleashed.ui.ItemSlot;
@@ -77,6 +79,7 @@ public class WndBag extends WndTabbed {
 		ENCHANTABLE,
 		WAND,
 		SEED,
+        DART,
 		FOOD,
 		POTION,
 		SCROLL,
@@ -119,7 +122,7 @@ public class WndBag extends WndTabbed {
 		lastBag = bag;
 
 		nCols = GoblinsPixelDungeon.landscape() ? COLS_L : COLS_P;
-		nRows = (Belongings.BACKPACK_SIZE + 4 + 1) / nCols + ((Belongings.BACKPACK_SIZE + 4 + 1) % nCols > 0 ? 1 : 0);
+		nRows = (int)Math.ceil((Belongings.BACKPACK_SIZE + 4) / (float)nCols);
 
 		int slotsWidth = SLOT_SIZE * nCols + SLOT_MARGIN * (nCols - 1);
 		int slotsHeight = SLOT_SIZE * nRows + SLOT_MARGIN * (nRows - 1);
@@ -130,6 +133,18 @@ public class WndBag extends WndTabbed {
 		txtTitle.x = (int)(slotsWidth - txtTitle.width()) / 2;
 		txtTitle.y = (int)(TITLE_HEIGHT - txtTitle.height()) / 2;
 		add( txtTitle );
+
+        ItemSprite gold = new ItemSprite(ItemSpriteSheet.GOLD, null);
+        gold.x = slotsWidth - gold.width() - 1;
+        gold.y = (TITLE_HEIGHT - gold.height())/2f - 1;
+        add(gold);
+
+        BitmapText amt = PixelScene.createText( Integer.toString(Dungeon.gold), 6, false );
+        amt.hardlight(TITLE_COLOR);
+        amt.measure();
+        amt.x = slotsWidth - gold.width() - amt.width() - 2;
+        amt.y = (TITLE_HEIGHT - amt.baseLine())/2f - 1;
+        add(amt);
 		
 		placeItems( bag );
 
@@ -142,6 +157,7 @@ public class WndBag extends WndTabbed {
 			stuff.getItem( ScrollHolder.class ),
 			stuff.getItem( PotionBandolier.class ),
 			stuff.getItem( WandHolster.class ),
+            stuff.getItem( DartBelt.class ),
             stuff.getItem( AnkhChain.class )};
 
 		for (Bag b : bags) {
@@ -202,12 +218,12 @@ public class WndBag extends WndTabbed {
 			placeItem( null );
 		}
 		
-		// Gold
+		/*/ Gold
 		if (container == Dungeon.hero.belongings.backpack) {
 			row = nRows - 1;
 			col = nCols - 1;
 			placeItem( new Gold( Dungeon.gold ) );
-		}
+		}/*/
 	}
 	
 	protected void placeItem( final Item item ) {
@@ -297,7 +313,9 @@ public class WndBag extends WndTabbed {
 			} else if (bag instanceof PotionBandolier) {
 				return Icons.get( Icons.POTION_BANDOLIER );
 			} else if (bag instanceof AnkhChain) {
-				return Icons.get(Icons.ANKH_CHAIN);
+                return Icons.get(Icons.ANKH_CHAIN);
+            } else if (bag instanceof DartBelt) {
+				return Icons.get(Icons.DART_BELT);
 			} else {
 				return Icons.get( Icons.BACKPACK );
 			}
@@ -387,6 +405,7 @@ public class WndBag extends WndTabbed {
 						mode == Mode.ARMOR && (item instanceof Armor) ||
 						mode == Mode.ENCHANTABLE && (item instanceof MeleeWeapon || item instanceof Boomerang || item instanceof Armor) ||
 						mode == Mode.WAND && (item instanceof Wand) ||
+                        mode == Mode.DART && (item instanceof Dart) ||
 						mode == Mode.SEED && (item instanceof Seed) ||
 						mode == Mode.FOOD && (item instanceof Food) ||
 						mode == Mode.POTION && (item instanceof Potion) ||

@@ -32,7 +32,7 @@ import com.shatteredpixel.pixeldungeonunleashed.sprites.RatKingSprite;
 public class RatKing extends NPC {
 
 	{
-		name = "rat king";
+		name = "m0rtimer";
 		spriteClass = RatKingSprite.class;
 		
 		state = SLEEPING;

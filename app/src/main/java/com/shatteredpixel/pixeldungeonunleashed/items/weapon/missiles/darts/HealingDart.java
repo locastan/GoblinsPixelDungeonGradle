@@ -45,8 +45,8 @@ public class HealingDart extends TippedDart {
 		//heals 30 hp at base, scaling with character HT
 		Buff.affect( defender, Healing.class ).setHeal((int)(0.5f*defender.HT + 30), 0.333f, 0);
 		PotionOfHealing.cure(defender);
-
-		super.proc(attacker, defender, damage);
+        // return damage = 1 to superfunction.
+		super.proc(attacker, defender, 1);
 	}
 
 	@Override

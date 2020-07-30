@@ -66,7 +66,7 @@ public class UnstableSpellbook extends Artifact {
 
     private final ArrayList<String> scrolls = new ArrayList<String>();
 
-    protected String inventoryTitle = "Select a scroll";
+    protected String inventoryTitle = "Select scroll:";
     protected WndBag.Mode mode = WndBag.Mode.SCROLL;
 
     public UnstableSpellbook() {
