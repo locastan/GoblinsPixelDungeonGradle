@@ -98,6 +98,7 @@ public class ItemSpriteSheet {
 	public static final int WAR_HAMMER		= ROW3+10;
 	public static final int GLAIVE			= ROW3+11;
     public static final int CROSSBOW		= ROW3+12;
+    public static final int TRANSHAMMER		= ROW3+13;
 
 	//Row Four: Missile weapons
 	public static final int DART			= ROW4;

@@ -45,7 +45,7 @@ public class AboutScene extends PixelScene {
 	private static final String TXT_UNLSH =
 			"Converted Code & Graphics: Mario \"locastan\" Braun\n\n" +
 			"Based on Unleashed Pixel Dungeon by David Mitchell, " +
-			"and the characters and lore of Tarol Stephens.\n\n";
+			"and the characters and lore of Ellipsis Hana Stephens.\n\n";
 	private static final String LNK_UNLSH = "www.goblinscomic.org";
 
 
@@ -69,7 +69,7 @@ public class AboutScene extends PixelScene {
 		final float wataOffset = GoblinsPixelDungeon.landscape() ? colWidth : 0;
 
         // place our Unleashed Icon
-		Image unlsh = Icons.UNLEASHED.get();
+		Image unlsh = Icons.TRANSHAMMER.get();
 		unlsh.x = align( (colWidth - unlsh.width()) / 2 );
 		unlsh.y = align( colTop );
 		add( unlsh );

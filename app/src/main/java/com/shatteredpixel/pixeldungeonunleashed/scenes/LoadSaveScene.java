@@ -538,8 +538,12 @@ public class LoadSaveScene extends PixelScene {
         File file = new File(downloadFolder);
         DownloadManager downloadManager = (DownloadManager) GoblinsPixelDungeon.instance.getSystemService(DOWNLOAD_SERVICE);
         downloadManager.addCompletedDownload(file.getName(), file.getName(), true, "application/zip",file.getAbsolutePath(),file.length(),true);
-        InterlevelScene.mode = InterlevelScene.Mode.SAVE;
-        Game.switchScene( InterlevelScene.class );
+        if (Dungeon.hero == null) {
+            Game.switchScene(TitleScene.class);
+        } else {
+            InterlevelScene.mode = InterlevelScene.Mode.SAVE;
+            Game.switchScene( InterlevelScene.class );
+        }
     }
 
     protected static void GetGamesBack() {
@@ -554,9 +558,12 @@ public class LoadSaveScene extends PixelScene {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
-        Game.switchScene( InterlevelScene.class );
+        if (Dungeon.hero == null) {
+            Game.switchScene(TitleScene.class);
+        } else {
+            InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
+            Game.switchScene( InterlevelScene.class );
+        }
     }
 
     private static class GameButton extends RedButton {

@@ -283,7 +283,7 @@ public abstract class Char extends Actor {
 			if (dmg == 0) {
 				dmg = Random.Int(Dungeon.depth/3, Dungeon.depth);
 			} else {
-				dmg += +dmg / 2;
+				dmg += dmg / 2;
 			}
             if (sprite != null) {
                 sprite.showStatus(CharSprite.NEGATIVE, "Vulnerable: "+ srcClass.getSimpleName());

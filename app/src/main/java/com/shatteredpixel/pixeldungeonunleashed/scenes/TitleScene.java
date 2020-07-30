@@ -148,8 +148,8 @@ public class TitleScene extends PixelScene {
 
 		if (GoblinsPixelDungeon.landscape()) {
 			float y = (h + height) / 2 - DashboardItem.SIZE;
-			btnHighscores    .setPos( w / 2 - btnHighscores.width(), y );
-			btnBadges        .setPos( w / 2, y );
+			btnBadges        .setPos( w / 2 - (btnBadges.width()/2), y );
+			btnHighscores    .setPos( btnBadges.left() - btnHighscores.width(), y );
 			btnPlay            .setPos( btnHighscores.left() - btnPlay.width(), y );
 			btnAbout        .setPos( btnBadges.right(), y );
             btnLoadSave        .setPos( btnAbout.right(), y );

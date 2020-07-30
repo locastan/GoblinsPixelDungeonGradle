@@ -135,8 +135,9 @@ public class GoblinsPixelDungeon extends Game {
 	}
 
     public static void checkWritePermission() {
-        int result = ContextCompat.checkSelfPermission(instance, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (result != PackageManager.PERMISSION_GRANTED) {
+		int permit = PackageManager.PERMISSION_GRANTED;
+        boolean result = (ContextCompat.checkSelfPermission(instance, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == permit) && (ContextCompat.checkSelfPermission(instance, android.Manifest.permission.READ_EXTERNAL_STORAGE) == permit) && (ContextCompat.checkSelfPermission(instance, android.Manifest.permission.INTERNET) == permit);
+        if (!result) {
             requestReadWritePermission();
         }
     }

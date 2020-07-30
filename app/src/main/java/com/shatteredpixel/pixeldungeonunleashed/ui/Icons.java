@@ -62,7 +62,8 @@ public enum Icons {
 	RESUME,
     ANKH_CHAIN,
 	ALCHEMY,
-	CROSSY;
+	CROSSY,
+    TRANSHAMMER;
 
 	public Image get() {
 		return get( this );
@@ -171,8 +172,11 @@ public enum Icons {
             icon.frame(icon.texture.uvRect(96, 40, 115, 60));
             break;
 		case CROSSY:
-			icon.frame(icon.texture.uvRect(0, 64, 16, 80));
-			break;
+            icon.frame(icon.texture.uvRect(0, 64, 16, 80));
+            break;
+        case TRANSHAMMER:
+            icon.frame(icon.texture.uvRect(16, 64, 32, 80));
+            break;
 		}
 		return icon;
 	}

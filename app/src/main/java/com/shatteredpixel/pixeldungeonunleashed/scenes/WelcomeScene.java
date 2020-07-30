@@ -35,7 +35,7 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TTL_Welcome = "Welcome!";
 
-	private static final String TTL_Update = "v0.1.5.3: Release";
+	private static final String TTL_Update = "v0.1.5.5: Release";
 
 	private static final String TTL_Future = "Wait What?";
 
@@ -47,6 +47,8 @@ public class WelcomeScene extends PixelScene {
 			"Enjoy";
 
 	private static final String TXT_Update =
+            "v0.1.5.5: Release\n"+
+                    "- Removed comic authors deadname\n"+
 			"v0.1.5.4: Release\n"+
 					"- Progress Backup + Transfer.\n"+
 					"- Added Dart shooting Crossbow.\n"+
