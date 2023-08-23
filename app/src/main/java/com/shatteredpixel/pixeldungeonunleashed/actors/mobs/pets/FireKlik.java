@@ -24,6 +24,7 @@ import com.shatteredpixel.pixeldungeonunleashed.actors.blobs.Fire;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Buff;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Burning;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Frost;
+import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Light;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.MagicalSleep;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Paralysis;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.BurningFist;
@@ -99,6 +100,9 @@ public class FireKlik extends PET implements Callback{
 			cooldown--;
 			if (cooldown==0) {yell("Klik-klik!");}
 		}
+        if (this.buff(Light.class) == null){
+            Buff.prolong(this, Light.class, 10000f);
+        }
 		
 		if (Random.Float()<regenChance && HP<HT){HP+=regen; super.checkHP();}
 

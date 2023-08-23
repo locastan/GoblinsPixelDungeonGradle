@@ -66,17 +66,17 @@ public class WellWater extends Blob {
 						"your equipped) items, reveals secrets about this dungeon level, and any uncollected items. " +
 						"Or, you could also try throwing an unidentified item in and see what happens."));
 				}
-			} else if (this instanceof WaterOfHealth && !Dungeon.tutorial_wellH_seen) {
+			} else if (this instanceof WaterOfHealth) {
 				Dungeon.tutorial_wellH_seen = true;
 				Journal.add( Feature.WELL_OF_HEALTH );
-				if (Dungeon.difficultyLevel == Dungeon.DIFF_TUTOR) {
+				if (Dungeon.difficultyLevel == Dungeon.DIFF_TUTOR && !Dungeon.tutorial_wellH_seen) {
 					GameScene.show(new WndMessage("Taking a drink from a Well of Health restores you to full health and " +
 						"satisfies your hunger."));
 				}
-			} else if (this instanceof WaterOfTransmutation && !Dungeon.tutorial_wellT_seen) {
+			} else if (this instanceof WaterOfTransmutation) {
 				Dungeon.tutorial_wellT_seen = true;
 				Journal.add( Feature.WELL_OF_TRANSMUTATION );
-				if (Dungeon.difficultyLevel == Dungeon.DIFF_TUTOR) {
+				if (Dungeon.difficultyLevel == Dungeon.DIFF_TUTOR && !Dungeon.tutorial_wellT_seen) {
 					GameScene.show(new WndMessage("A Well of Transmutation allows you to exchange one item for another of " +
 						" similar value; an enchanted tier-3 weapon for a different enchanted tier-3 weapon, an artifact for " +
 						" an artifact.  Some rare items can only be obtained through a Well of Transmutation."));

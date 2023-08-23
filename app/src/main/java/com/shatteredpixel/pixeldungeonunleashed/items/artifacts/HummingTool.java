@@ -62,14 +62,14 @@ public class HummingTool extends Artifact {
 	@Override
 	public ArrayList<String> actions( Hero hero ) {
 		ArrayList<String> actions = super.actions( hero );
-		if ( level < 3 && !cursed) {
+		if (!cursed) {
             actions.add(AC_FEED);
-            actions.remove(AC_EQUIP);
         }
         if (cursed) {
             actions.remove(AC_DROP);
             actions.remove(AC_THROW);
         }
+        actions.remove(AC_EQUIP);
 		return actions;
 	}
 

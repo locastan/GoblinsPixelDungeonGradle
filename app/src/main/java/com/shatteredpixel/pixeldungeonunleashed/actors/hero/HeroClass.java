@@ -29,12 +29,13 @@ import com.shatteredpixel.pixeldungeonunleashed.Challenges;
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.GoblinsPixelDungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Fury;
+import com.shatteredpixel.pixeldungeonunleashed.items.Egg;
 import com.shatteredpixel.pixeldungeonunleashed.items.TomeOfMastery;
 import com.shatteredpixel.pixeldungeonunleashed.items.Torch;
 import com.shatteredpixel.pixeldungeonunleashed.items.armor.PlateArmor;
-import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.AlchemistsToolkit;
 import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.CloakOfShadows;
-import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.ShieldOfWonders;
+import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.DevBeacon;
+import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.HummingTool;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.AnkhChain;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.DartBelt;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.PotionBandolier;
@@ -56,6 +57,7 @@ import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.pixeldungeonunleashed.items.wands.WandOfMagicMissile;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.Dagger;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.ShortSword;
+import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.WarHammer;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.missiles.darts.Dart;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.missiles.Boomerang;
 import com.watabou.utils.Bundle;
@@ -167,12 +169,16 @@ public enum HeroClass {
         new PotionBandolier().collect();
         new ScrollHolder().collect();
         new WandHolster().collect();
-        new PlateArmor().identify().upgrade(10).collect();
-		new Dart().quantity(14).collect();
+        new PlateArmor().identify().upgrade(20).collect();
+		new HummingTool().upgrade(3).collect();
+        new WarHammer().identify().upgrade(20).collect();
+        new Egg().collect();
+        new DevBeacon().identify().collect();
 		new Crossbow().identify().collect();
 		// things we only want a few of..
 		for (int i = 0; i < 4; i++) {
 			new PotionOfMight().collect();
+            new PotionOfMindVision().collect();
 			new PotionOfHealing().collect();
 			new ScrollOfRemoveCurse().collect();
 		}
@@ -181,7 +187,7 @@ public enum HeroClass {
 			new ScrollOfMagicMapping().identify().collect();
 		}
 		// things we want a bunch of...
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 16; i++) {
 			new Torch().identify().collect();
 			new Food().collect();
 			new ScrollOfIdentify().identify().collect();

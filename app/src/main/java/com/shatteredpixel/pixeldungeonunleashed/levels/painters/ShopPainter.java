@@ -43,14 +43,17 @@ import com.shatteredpixel.pixeldungeonunleashed.items.armor.MailArmor;
 import com.shatteredpixel.pixeldungeonunleashed.items.armor.PlateArmor;
 import com.shatteredpixel.pixeldungeonunleashed.items.armor.ScaleArmor;
 import com.shatteredpixel.pixeldungeonunleashed.items.artifacts.TimekeepersHourglass;
+import com.shatteredpixel.pixeldungeonunleashed.items.bags.AnkhChain;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.DartBelt;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.PotionBandolier;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.ScrollHolder;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.SeedPouch;
 import com.shatteredpixel.pixeldungeonunleashed.items.bags.WandHolster;
 import com.shatteredpixel.pixeldungeonunleashed.items.food.OverpricedRation;
+import com.shatteredpixel.pixeldungeonunleashed.items.keys.Key;
 import com.shatteredpixel.pixeldungeonunleashed.items.potions.Potion;
 import com.shatteredpixel.pixeldungeonunleashed.items.potions.PotionOfHealing;
+import com.shatteredpixel.pixeldungeonunleashed.items.rings.Ring;
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.Scroll;
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfMagicMapping;
@@ -264,22 +267,35 @@ public class ShopPainter extends Painter {
 		Collections.shuffle(itemsToSpawn);
 	}
 
-	private static void ChooseBag(Belongings pack){
+	private static void ChooseBag(Belongings pack) {
 
-		int seeds = 0, scrolls = 0, potions = 0, wands = 0, darts = 0;
-        boolean pouch = false, holder = false, bandolier = false, holster = false, belt = false;
+        int seeds = 0, scrolls = 0, potions = 0, wands = 0, darts = 0, chainstuff = 0;
+        boolean pouch = false, holder = false, bandolier = false, holster = false, belt = false, chain = false;
 
-        if (pack.backpack.items.contains(SeedPouch.class.getSimpleName())) { pouch = true; }
-        if (pack.backpack.items.contains(ScrollHolder.class.getSimpleName())) { holder = true; }
-        if (pack.backpack.items.contains(PotionBandolier.class.getSimpleName())) { bandolier = true; }
-        if (pack.backpack.items.contains(WandHolster.class.getSimpleName())) { holster = true; }
-        if (pack.backpack.items.contains(DartBelt.class.getSimpleName())) { belt = true; }
+        if (pack.backpack.items.contains(SeedPouch.class.getSimpleName())) {
+            pouch = true;
+        }
+        if (pack.backpack.items.contains(ScrollHolder.class.getSimpleName())) {
+            holder = true;
+        }
+        if (pack.backpack.items.contains(PotionBandolier.class.getSimpleName())) {
+            bandolier = true;
+        }
+        if (pack.backpack.items.contains(WandHolster.class.getSimpleName())) {
+            holster = true;
+        }
+        if (pack.backpack.items.contains(DartBelt.class.getSimpleName())) {
+            belt = true;
+        }
+        if (pack.backpack.items.contains(AnkhChain.class.getSimpleName())) {
+            chain = true;
+        }
 
         //count up items in the main bag, for bags which are not in players inventory or have already dropped in any mode besides endless.
         for (Item item : pack.backpack.items) {
-            if (!pouch && !Dungeon.limitedDrops.seedBag.dropped() && item instanceof Plant.Seed )
+            if (!pouch && !Dungeon.limitedDrops.seedBag.dropped() && item instanceof Plant.Seed)
                 seeds++;
-            else if (!holder && !Dungeon.limitedDrops.scrollBag.dropped()&& item instanceof Scroll)
+            else if (!holder && !Dungeon.limitedDrops.scrollBag.dropped() && item instanceof Scroll)
                 scrolls++;
             else if (!bandolier && !Dungeon.limitedDrops.potionBag.dropped() && item instanceof Potion)
                 potions++;
@@ -287,28 +303,34 @@ public class ShopPainter extends Painter {
                 wands++;
             else if (!belt && !Dungeon.limitedDrops.dartBag.dropped() && item instanceof Dart)
                 darts++;
+            else if (!chain && !Dungeon.limitedDrops.ankhChain.dropped() && (item instanceof Ankh || item instanceof Ring || item instanceof Key))
+                chainstuff++;
         }
         //then pick whichever valid bag has the most items available to put into it.
         //note that the order here gives a perference if counts are otherwise equal
-        if (seeds >= scrolls && seeds >= potions && seeds >= wands && seeds >= darts && !Dungeon.limitedDrops.seedBag.dropped()) {
+        if (seeds >= scrolls && seeds >= potions && seeds >= wands && seeds >= darts && seeds >= chainstuff && !Dungeon.limitedDrops.seedBag.dropped()) {
             Dungeon.limitedDrops.seedBag.drop();
-            itemsToSpawn.add( new SeedPouch() );
+            itemsToSpawn.add(new SeedPouch());
 
-        } else if (scrolls >= potions && scrolls >= wands && scrolls >= darts && !Dungeon.limitedDrops.scrollBag.dropped()) {
+        } else if (scrolls >= potions && scrolls >= wands && scrolls >= darts && scrolls >= chainstuff && !Dungeon.limitedDrops.scrollBag.dropped()) {
             Dungeon.limitedDrops.scrollBag.drop();
-            itemsToSpawn.add( new ScrollHolder() );
+            itemsToSpawn.add(new ScrollHolder());
 
-        } else if (potions >= wands && potions >= darts && !Dungeon.limitedDrops.potionBag.dropped()) {
+        } else if (potions >= wands && potions >= darts && potions >= chainstuff && !Dungeon.limitedDrops.potionBag.dropped()) {
             Dungeon.limitedDrops.potionBag.drop();
-            itemsToSpawn.add( new PotionBandolier() );
+            itemsToSpawn.add(new PotionBandolier());
 
-        } else if (wands >= darts && !Dungeon.limitedDrops.wandBag.dropped()) {
+        } else if (wands >= darts && wands >= chainstuff && !Dungeon.limitedDrops.wandBag.dropped()) {
             Dungeon.limitedDrops.wandBag.drop();
             itemsToSpawn.add(new WandHolster());
 
-        } else if (!Dungeon.limitedDrops.dartBag.dropped()) {
+        } else if (darts >= chainstuff && !Dungeon.limitedDrops.dartBag.dropped()) {
             Dungeon.limitedDrops.dartBag.drop();
             itemsToSpawn.add(new DartBelt());
+
+        } else if (!Dungeon.limitedDrops.ankhChain.dropped()){
+            Dungeon.limitedDrops.ankhChain.drop();
+            itemsToSpawn.add(new AnkhChain());
         }
     }
 

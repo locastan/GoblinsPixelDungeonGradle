@@ -995,6 +995,8 @@ public abstract class Level implements Bundlable {
 		
 		int cx = c.pos % WIDTH;
 		int cy = c.pos / WIDTH;
+
+        PET pet = checkpet();
 		
 		boolean sighted = c.buff( Blindness.class ) == null && c.buff( Shadows.class ) == null
 						&& c.buff( TimekeepersHourglass.timeStasis.class ) == null && c.isAlive();
@@ -1075,6 +1077,18 @@ public abstract class Level implements Bundlable {
 					fieldOfView[p - WIDTH] = true;
 				}
 			}
+            if (Dungeon.hero.petType==4 && pet != null){
+                int p = pet.pos;
+                fieldOfView[p] = true;
+                fieldOfView[p + 1] = true;
+                fieldOfView[p - 1] = true;
+                fieldOfView[p + WIDTH + 1] = true;
+                fieldOfView[p + WIDTH - 1] = true;
+                fieldOfView[p - WIDTH + 1] = true;
+                fieldOfView[p - WIDTH - 1] = true;
+                fieldOfView[p + WIDTH] = true;
+                fieldOfView[p - WIDTH] = true;
+            }
 		}
 
 		for (Heap heap : heaps.values())

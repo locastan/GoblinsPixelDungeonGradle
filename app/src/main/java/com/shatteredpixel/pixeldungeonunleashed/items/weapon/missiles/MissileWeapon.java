@@ -109,9 +109,10 @@ public class MissileWeapon extends Weapon {
 		Hero hero = (Hero)attacker;
 		if (hero.rangedWeapon == null && stackable) {
 			if (quantity == 1) {
-				doUnequip( hero, false, false );
+				//doUnequip( hero, false, false ); this causes the main weapon to disappear when stabbing with 1 dart left
+                detach( hero.belongings.backpack );
 			} else {
-				detach( null );
+				detach( hero.belongings.backpack );
 			}
 		}
 	}

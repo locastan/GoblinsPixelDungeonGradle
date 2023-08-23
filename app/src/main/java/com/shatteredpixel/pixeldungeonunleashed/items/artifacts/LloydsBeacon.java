@@ -32,6 +32,7 @@ import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Buff;
 import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Invisibility;
 import com.shatteredpixel.pixeldungeonunleashed.actors.hero.Hero;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Mob;
+import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.pets.PET;
 import com.shatteredpixel.pixeldungeonunleashed.effects.MagicMissile;
 import com.shatteredpixel.pixeldungeonunleashed.items.Item;
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfTeleportation;
@@ -136,7 +137,7 @@ public class LloydsBeacon extends Artifact {
 			}
 			
 			for (int i=0; i < Level.NEIGHBOURS8.length; i++) {
-				if (Actor.findChar( hero.pos + Level.NEIGHBOURS8[i] ) != null) {
+				if ((Actor.findChar(hero.pos + Level.NEIGHBOURS8[i]) != null) && !(Actor.findChar(hero.pos + Level.NEIGHBOURS8[i]) instanceof PET)) {
 					GLog.w( TXT_CREATURES );
 					return;
 				}

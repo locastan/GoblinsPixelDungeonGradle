@@ -46,6 +46,7 @@ import com.shatteredpixel.pixeldungeonunleashed.ui.Archs;
 import com.shatteredpixel.pixeldungeonunleashed.ui.RedButton;
 import com.shatteredpixel.pixeldungeonunleashed.ui.Window;
 import com.shatteredpixel.pixeldungeonunleashed.utils.Utils;
+import com.shatteredpixel.pixeldungeonunleashed.windows.WndError;
 import com.shatteredpixel.pixeldungeonunleashed.windows.WndOptions;
 import com.shatteredpixel.pixeldungeonunleashed.windows.WndStory;
 import com.watabou.noosa.BitmapText;
@@ -139,11 +140,11 @@ public class LoadSaveScene extends PixelScene {
                 break;
             case Dungeon.DIFF_NTMARE:
                 diffLevel = "NIGHTMARE";
-                saveInstructions = "Games may not be saved in Nightmare mode.";
+                saveInstructions = "Games may not be saved/backed up in Nightmare mode.";
                 break;
             case Dungeon.DIFF_ENDLESS:
                 diffLevel = "ENDLESS";
-                saveInstructions = "Games may not be saved in Endless mode.";
+                saveInstructions = "Games may not be saved/backed up in Endless mode.";
                 break;
             case Dungeon.DIFF_TEST:
                 diffLevel = "TEST";
@@ -293,11 +294,15 @@ public class LoadSaveScene extends PixelScene {
         add(buttonCapton2);
 
         // add the Export and Import button..
-
-        ExImButton btnEx = new ExImButton(this, true, "Backup", "all");
-        add(btnEx);
-        btnEx.visible = true;
-        btnEx.setRect(posX, posY, BUTTON1_WIDTH, BUTTON_HEIGHT);
+        // Export only if difficulty allows saving as well.
+        int diff = GoblinsPixelDungeon.getDifficulty();
+        if ((Dungeon.hero == null) || (!Dungeon.hero.isAlive()) || (diff <= Dungeon.DIFF_EASY) || (diff <= Dungeon.DIFF_TEST) ||
+                (diff == Dungeon.DIFF_NORM)) {
+            ExImButton btnEx = new ExImButton(this, true, "Backup", "all");
+            add(btnEx);
+            btnEx.visible = true;
+            btnEx.setRect(posX, posY, BUTTON1_WIDTH, BUTTON_HEIGHT);
+        }
 
         ExImButton btnIm = new ExImButton(this, false, "Import", "all");
 
@@ -527,22 +532,29 @@ public class LoadSaveScene extends PixelScene {
         }
     }
 
+    private static boolean checkPermission() {
+        int permit = PackageManager.PERMISSION_GRANTED;
+        return (ContextCompat.checkSelfPermission(Game.instance, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == permit) && (ContextCompat.checkSelfPermission(Game.instance, android.Manifest.permission.READ_EXTERNAL_STORAGE) == permit) && (ContextCompat.checkSelfPermission(Game.instance, android.Manifest.permission.INTERNET) == permit);
+    }
 
 
     protected static void BackupGames() {
         String gameSlotFolder = Game.instance.getFilesDir().toString();
         String downloadFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+ "/" + "GoblinsPDBackup.dat";
-
-        zipFileAtPath(gameSlotFolder,downloadFolder);
-        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString());
-        File file = new File(downloadFolder);
-        DownloadManager downloadManager = (DownloadManager) GoblinsPixelDungeon.instance.getSystemService(DOWNLOAD_SERVICE);
-        downloadManager.addCompletedDownload(file.getName(), file.getName(), true, "application/zip",file.getAbsolutePath(),file.length(),true);
-        if (Dungeon.hero == null) {
-            Game.switchScene(TitleScene.class);
+        if (checkPermission()) {
+            zipFileAtPath(gameSlotFolder, downloadFolder);
+            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString());
+            File file = new File(downloadFolder);
+            DownloadManager downloadManager = (DownloadManager) GoblinsPixelDungeon.instance.getSystemService(DOWNLOAD_SERVICE);
+            downloadManager.addCompletedDownload(file.getName(), file.getName(), true, "application/zip", file.getAbsolutePath(), file.length(), true);
+            if (Dungeon.hero == null) {
+                Game.switchScene(TitleScene.class);
+            } else {
+                InterlevelScene.mode = InterlevelScene.Mode.SAVE;
+                Game.switchScene(InterlevelScene.class);
+            }
         } else {
-            InterlevelScene.mode = InterlevelScene.Mode.SAVE;
-            Game.switchScene( InterlevelScene.class );
+            Game.scene().add(new WndError("Read/Write External Storage & Internet permissions allow us to work with backups. Please allow these permissions in App Settings."));
         }
     }
 
@@ -552,17 +564,20 @@ public class LoadSaveScene extends PixelScene {
         // Need to replace redundant "files" folder to prevent unzip into new subfolder "files" inside the "files" folder we are in already.
         gameSlotFolder = gameSlotFolder.replace("files","");
         String downloadFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()+ "/" + "GoblinsPDBackup.dat";
-
-        try {
-            unZip(downloadFolder,gameSlotFolder);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (Dungeon.hero == null) {
-            Game.switchScene(TitleScene.class);
-        } else {
-            InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
-            Game.switchScene( InterlevelScene.class );
+        if (checkPermission()) {
+            try {
+                unZip(downloadFolder, gameSlotFolder);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (Dungeon.hero == null) {
+                Game.switchScene(TitleScene.class);
+            } else {
+                InterlevelScene.mode = InterlevelScene.Mode.CONTINUE;
+                Game.switchScene(InterlevelScene.class);
+            }
+        }  else {
+            Game.scene().add(new WndError("Read/Write External Storage & Internet permissions allow us to work with backups. Please allow these permissions in App Settings."));
         }
     }
 

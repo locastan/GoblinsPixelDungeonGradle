@@ -24,7 +24,11 @@
 package com.shatteredpixel.pixeldungeonunleashed.scenes;
 
 import com.shatteredpixel.pixeldungeonunleashed.GoblinsPixelDungeon;
+import com.shatteredpixel.pixeldungeonunleashed.actors.Actor;
+import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Mob;
+import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.pets.PET;
 import com.shatteredpixel.pixeldungeonunleashed.items.Amulet;
+import com.shatteredpixel.pixeldungeonunleashed.levels.Level;
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
@@ -91,6 +95,7 @@ public class AmuletScene extends PixelScene {
                 Dungeon.win( ResultDescriptions.WIN );
                 Dungeon.hero.belongings.getItem(Amulet.class).detach(Dungeon.hero.belongings.backpack);
                 GoblinsPixelDungeon.setDifficulty(15);
+                checkPetPort();
                 Dungeon.difficultyLevel = GoblinsPixelDungeon.getDifficulty();
                 InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
 				Game.switchScene( InterlevelScene.class );
@@ -137,6 +142,45 @@ public class AmuletScene extends PixelScene {
 		
 		fadeIn();
 	}
+
+    private PET checkpet(){
+        for (Mob mob : Dungeon.level.mobs) {
+            if(mob instanceof PET) {
+                return (PET) mob;
+            }
+        }
+        return null;
+    }
+
+    private boolean checkpetNear(){
+        for (int n : Level.NEIGHBOURS8) {
+            int c =  Dungeon.hero.pos + n;
+            if (Actor.findChar(c) instanceof PET) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void checkPetPort(){
+        PET pet = checkpet();
+        if(pet!=null && checkpetNear()){
+            //GLog.i("I see pet");
+            Dungeon.hero.petType=pet.type;
+            Dungeon.hero.petLevel=pet.level;
+            Dungeon.hero.petKills=pet.kills;
+            Dungeon.hero.petHP=pet.HP;
+            Dungeon.hero.petExperience=pet.experience;
+            Dungeon.hero.petCooldown=pet.cooldown;
+            pet.destroy();
+            Dungeon.hero.petfollow=true;
+        } else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+            Dungeon.hero.petfollow=true;
+        } else {
+            Dungeon.hero.petfollow=false;
+        }
+
+    }
 	
 	@Override
 	protected void onBackPressed() {

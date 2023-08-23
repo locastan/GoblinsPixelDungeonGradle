@@ -39,7 +39,7 @@ import com.shatteredpixel.pixeldungeonunleashed.windows.WndBag;
 
 public class ArmorKit extends Item {
 	
-	private static final String TXT_SELECT_ARMOR	= "Upgrade armor:";
+	private static final String TXT_SELECT_ARMOR	= "Select armor:";
 	private static final String TXT_UPGRADED		= "you applied the armor kit to upgrade your %s";
 	
 	private static final float TIME_TO_UPGRADE = 2;

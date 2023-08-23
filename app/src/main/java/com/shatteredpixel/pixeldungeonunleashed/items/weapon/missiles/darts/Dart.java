@@ -103,6 +103,7 @@ public class Dart extends MissileWeapon {
 		} else {
 			bow = null;
 		}
+        updateQuickslot();
 	}
 
 	@Override

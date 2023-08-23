@@ -75,7 +75,7 @@ public class WndLockpick extends Window {
 
 		super();
         thecell = cell;
-        Log.e("Cell Number: ", String.valueOf(cell));
+        //Log.e("Cell Number: ", String.valueOf(cell));
         thehero = hero;
         hummingtool = hero.belongings.getItem(HummingTool.class);
 		resize(WIDTH, GoblinsPixelDungeon.landscape() ? HEIGHT_L : HEIGHT_P);
@@ -88,7 +88,7 @@ public class WndLockpick extends Window {
 
         BitmapTextMultiline info = PixelScene.createMultiline( 5, false );
         add( info );
-        info.text( "Click the gears to align the gaps on top." );
+        info.text( "Click the gears to align the gaps on top.\nTo use autosolve you need to level up the tool." );
         info.maxWidth = WIDTH;
         info.measure();
         info.x = 2;
@@ -119,7 +119,6 @@ public class WndLockpick extends Window {
             @Override
             protected void onClick() {
                 Autosolve();
-                hide();
             }
         };
         checkToolCharge();
@@ -133,7 +132,7 @@ public class WndLockpick extends Window {
         // Standard Door or Chest
             if (isBetween(Dungeon.depth,1,6)) {
                 // Simple locks for Sewers
-                Log.e("Simple Locks", String.valueOf(crosssum(cell)));
+                //Log.e("Simple Locks", String.valueOf(crosssum(cell)));
                 if (cell % 2 == 0) {
                     addGear(1, 30, 0x009933, new Integer[]{2});
                     addGear(2, -60, 0xDD0000, new Integer[]{});
@@ -296,7 +295,7 @@ public class WndLockpick extends Window {
     }
 
     private void addGear(final Integer ID, Integer Step, final Integer color, final Integer[] affect) {
-        Log.e("Adding gear: ", String.valueOf(ID));
+        //Log.e("Adding gear: ", String.valueOf(ID));
         gear[ID] = new Image( Assets.GEAR );
         gear[ID].color(0xFFCC00);
         add( gear[ID] );

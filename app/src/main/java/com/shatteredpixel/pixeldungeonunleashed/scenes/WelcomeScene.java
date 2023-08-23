@@ -35,7 +35,7 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TTL_Welcome = "Welcome!";
 
-	private static final String TTL_Update = "v0.1.5.5: Release";
+	private static final String TTL_Update = "v0.1.5.7: Release";
 
 	private static final String TTL_Future = "Wait What?";
 
@@ -47,6 +47,14 @@ public class WelcomeScene extends PixelScene {
 			"Enjoy";
 
 	private static final String TXT_Update =
+            "v0.1.5.7: Release\n"+
+                    "- Fixed Hummingtool autosolve crash.\n"+
+                    "- Klik no longer blocks Lloyds beacon.\n"+
+                    "- Fire Klik now is a lightsource.\n"+
+                    "- Klik can progress into endless mode.\n"+
+                    "- Klik teleports with Lloyds use.\n"+
+            "v0.1.5.6: Release\n"+
+                    "- Small bugfixes.\n"+
             "v0.1.5.5: Release\n"+
                     "- Removed comic authors deadname\n"+
 			"v0.1.5.4: Release\n"+
@@ -61,13 +69,8 @@ public class WelcomeScene extends PixelScene {
 					"- Fix: Tombstone inspection bug.\n"+
 					"- Fix: Hummingtl crash full bkpck.\n"+
 					"- Pets now always stay in sight.\n"+
-					"- Added a new Alch. Toolkit feature.\n"+
-			"v0.1.5.3: Release\n"+
-					"- Alch. Toolkit no longer consumes potions.\n"+
-					"- Changed Horn of Plenty to Anypot.\n"+
-					"- New Enemies: Bod fly and red snake.\n"+
-					"- Potion of Purification buff.\n"+
-					"- Replaced overpriced ration.\n";
+					"- Added a new Alch. Toolkit feature.\n";
+
 
 	private static final String TXT_Future =
 			"It seems that your current saves are from a future version of Goblins Pixel Dungeon!\n\n"+
