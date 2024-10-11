@@ -23,6 +23,7 @@ import java.util.HashSet;
 import com.shatteredpixel.pixeldungeonunleashed.Dungeon;
 import com.shatteredpixel.pixeldungeonunleashed.actors.Actor;
 import com.shatteredpixel.pixeldungeonunleashed.actors.Char;
+import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Corruption;
 import com.shatteredpixel.pixeldungeonunleashed.actors.hero.Hero;
 import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.Mob;
 import com.shatteredpixel.pixeldungeonunleashed.effects.CellEmitter;
@@ -215,10 +216,10 @@ public abstract class PET extends Mob {
 			experience=0;
 		}
 		
-		if (enemy == null || !enemy.isAlive()) {
+		if (enemy == null || !enemy.isAlive() || enemy.buff(Corruption.class) != null) {
 			HashSet<Mob> enemies = new HashSet<Mob>();
 			for (Mob mob : Dungeon.level.mobs) {
-				if (mob.hostile && Level.fieldOfView[mob.pos]) {
+				if (mob.hostile && Level.fieldOfView[mob.pos] && mob.buff(Corruption.class) == null) {
 					enemies.add(mob);
 				}
 			}

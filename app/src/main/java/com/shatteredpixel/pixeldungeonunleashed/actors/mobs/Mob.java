@@ -38,6 +38,7 @@ import com.shatteredpixel.pixeldungeonunleashed.actors.buffs.Terror;
 import com.shatteredpixel.pixeldungeonunleashed.actors.hero.Hero;
 import com.shatteredpixel.pixeldungeonunleashed.actors.hero.HeroClass;
 import com.shatteredpixel.pixeldungeonunleashed.actors.hero.HeroSubClass;
+import com.shatteredpixel.pixeldungeonunleashed.actors.mobs.pets.PET;
 import com.shatteredpixel.pixeldungeonunleashed.effects.Surprise;
 import com.shatteredpixel.pixeldungeonunleashed.effects.Wound;
 import com.shatteredpixel.pixeldungeonunleashed.items.Generator;
@@ -284,10 +285,10 @@ public abstract class Mob extends Char {
 		}
 
 		//resets target if: the target is dead, the target has been lost (wandering)
-		//or if the mob is amoked/corrupted and targeting the hero (will try to target something else)
+		//or if the mob is amoked/corrupted and targeting the hero or pet (will try to target something else)
 		if ( enemy != null &&
 				!enemy.isAlive() || state == WANDERING ||
-				((buff( Amok.class ) != null || buff(Corruption.class) != null) && enemy == Dungeon.hero ))
+				((buff( Amok.class ) != null || buff(Corruption.class) != null) && (enemy == Dungeon.hero || enemy instanceof PET) ))
 			enemy = null;
 
 		//if there is no current target, find a new one.
@@ -298,15 +299,15 @@ public abstract class Mob extends Char {
 			//if the mob is amoked or corrupted...
 			if ( buff(Amok.class) != null || buff(Corruption.class) != null) {
 
-				//try to find an enemy mob to attack first.
+				//try to find an (uncorrupted) enemy mob to attack first.
 				for (Mob mob : Dungeon.level.mobs)
-					if (mob != this && Level.fieldOfView[mob.pos] && mob.hostile)
+					if (mob != this && Level.fieldOfView[mob.pos] && mob.hostile && mob.buff(Corruption.class) == null)
 							enemies.add(mob);
 				if (enemies.size() > 0) return Random.element(enemies);
 
-				//try to find ally mobs to attack second.
+				//if amoked try to find ally mobs to attack second.
 				for (Mob mob : Dungeon.level.mobs)
-					if (mob != this && Level.fieldOfView[mob.pos] && mob.ally)
+					if (mob != this && Level.fieldOfView[mob.pos] && mob.ally && buff(Amok.class) != null)
 						enemies.add(mob);
 				if (enemies.size() > 0) return Random.element(enemies);
 

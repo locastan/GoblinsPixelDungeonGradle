@@ -52,6 +52,7 @@ import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfIdentify;
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfMagicMapping;
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfRemoveCurse;
 import com.shatteredpixel.pixeldungeonunleashed.items.scrolls.ScrollOfUpgrade;
+import com.shatteredpixel.pixeldungeonunleashed.items.wands.WandOfCorruption;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.Crossbow;
 import com.shatteredpixel.pixeldungeonunleashed.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.pixeldungeonunleashed.items.wands.WandOfMagicMissile;
@@ -175,6 +176,7 @@ public enum HeroClass {
         new Egg().collect();
         new DevBeacon().identify().collect();
 		new Crossbow().identify().collect();
+        new WandOfCorruption().identify().collect();
 		// things we only want a few of..
 		for (int i = 0; i < 4; i++) {
 			new PotionOfMight().collect();

@@ -35,7 +35,7 @@ public class WelcomeScene extends PixelScene {
 
 	private static final String TTL_Welcome = "Welcome!";
 
-	private static final String TTL_Update = "v0.1.5.7: Release";
+	private static final String TTL_Update = "v0.1.5.8: Release";
 
 	private static final String TTL_Future = "Wait What?";
 
@@ -47,6 +47,8 @@ public class WelcomeScene extends PixelScene {
 			"Enjoy";
 
 	private static final String TXT_Update =
+            "v0.1.5.8: Release\n"+
+                    "- Corrupted no longer attack allies.\n"+
             "v0.1.5.7: Release\n"+
                     "- Fixed Hummingtool autosolve crash.\n"+
                     "- Klik no longer blocks Lloyds beacon.\n"+
